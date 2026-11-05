@@ -1,0 +1,27 @@
+RECORDED HTTP INTEGRATION TEST RESULTS
+Source: delivery-http-tests.json / edge-outage-recovered.json / cloud-yolo-tests.json
+
+LOCAL: http://127.0.0.1:8000
+Recorded: 2026-11-05T00:31:02.976143+00:00
+Checks: 15/15 PASS
+New event POST -> HTTP 201
+Same event retry -> HTTP 200 / same post
+Changed payload, same key -> HTTP 409
+Conditional GET -> HTTP 304 / empty body
+Delete own temporary post -> HTTP 204
+Deleted post GET -> HTTP 404
+Deleted event late retry -> HTTP 410
+
+ACTUAL EDGE OUTAGE AND RESTART
+Recorded: 2026-11-05T00:48:08.963938+00:00
+Checks: 14/14 PASS
+Persisted UUID -> automatic SENT after server returned
+JPEG bytes: exact SHA-256 match; duplicate retry adds no post
+
+CLOUD: https://gyusik.pythonanywhere.com
+Recorded: 2026-11-05T00:53:27.539793+00:00
+Checks: 14/14 PASS
+Actual YOLO HTTPS POST -> HTTP 201
+Same event retry -> HTTP 200 / same post
+Conditional GET -> HTTP 304 / empty body
+HTTPS served JPEG: exact byte match; one new cloud post

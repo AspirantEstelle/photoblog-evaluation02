@@ -1,0 +1,23 @@
+{"uploads": [{"event_id": "7c4980d5-0d59-4e3b-9dca-eb3083e55cad", "state": "pending", "error": "ConnectionError"}]}
+{
+  "counts": {
+    "pending": 1,
+    "inflight": 0,
+    "sent": 0,
+    "failed": 0
+  },
+  "events": [
+    {
+      "event_id": "7c4980d5-0d59-4e3b-9dca-eb3083e55cad",
+      "server": "http://127.0.0.1:8000",
+      "title": "YOLO 감지: person, tie",
+      "state": "pending",
+      "attempts": 1,
+      "next_attempt": 1793839412.321428,
+      "last_error": "ConnectionError",
+      "post_id": null,
+      "image_size": 24501
+    }
+  ]
+}
+WARNING PENDING event=7c4980d5-0d59-4e3b-9dca-eb3083e55cad attempt=1 reason=ConnectionError

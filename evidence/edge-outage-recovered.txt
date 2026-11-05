@@ -1,0 +1,20 @@
+2026-11-05 09:48:08,966 INFO PASS one_persisted_pending_yolo_event {}
+2026-11-05 09:48:08,967 INFO PASS event_is_pending_after_actual_connection_failure {"initial_state": "pending", "previous_attempts": 1}
+2026-11-05 09:48:08,970 INFO PASS retained_jpeg_payload_present {}
+2026-11-05 09:48:08,985 INFO Starting a new worker process from the existing persisted queue event=7c4980d5-0d59-4e3b-9dca-eb3083e55cad
+2026-11-05 09:48:11,048 WARNING PENDING event=7c4980d5-0d59-4e3b-9dca-eb3083e55cad attempt=2 reason=ConnectionError
+2026-11-05 09:48:11,291 INFO PASS new_process_reloaded_event_and_observed_outage {"attempts": 2, "state": "pending"}
+2026-11-05 09:48:11,294 INFO READY: waiting for Django to return; retry scheduling is automatic
+2026-11-05 09:48:17,125 WARNING PENDING event=7c4980d5-0d59-4e3b-9dca-eb3083e55cad attempt=3 reason=ConnectionError
+2026-11-05 09:48:27,278 WARNING PENDING event=7c4980d5-0d59-4e3b-9dca-eb3083e55cad attempt=4 reason=ConnectionError
+2026-11-05 09:48:43,703 INFO SENT event=7c4980d5-0d59-4e3b-9dca-eb3083e55cad post=4 replay=false
+2026-11-05 09:48:44,106 INFO PASS automatic_recovery_sent_same_event_uuid {"event_id": "7c4980d5-0d59-4e3b-9dca-eb3083e55cad", "state": "sent", "attempts": 5, "post_id": 4}
+2026-11-05 09:48:44,107 INFO PASS successful_send_released_queued_image_blob {}
+2026-11-05 09:48:44,120 INFO PASS exactly_one_new_post_after_recovery {"before": 2, "after": 3}
+2026-11-05 09:48:44,120 INFO PASS new_post_has_real_yolo_classes {"title": "YOLO 감지: person, tie"}
+2026-11-05 09:48:44,121 INFO PASS new_post_preserves_original_text {}
+2026-11-05 09:48:44,121 INFO PASS served_image_is_on_local_test_server {}
+2026-11-05 09:48:44,360 INFO PASS served_jpeg_exactly_matches_persisted_yolo_bytes {"original_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f", "served_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f"}
+2026-11-05 09:48:44,398 INFO PASS actual_duplicate_delivery_returns_same_post {"status": 200, "same_post_id": 4}
+2026-11-05 09:48:44,398 INFO PASS server_marks_duplicate_as_replayed {}
+2026-11-05 09:48:44,409 INFO PASS duplicate_did_not_add_another_post {"after_replay": 3}

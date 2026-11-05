@@ -1,0 +1,7 @@
+PASS: Network operation finished within 45 seconds
+PASS: Server synchronization completed
+PASS: Server feed includes the expected edge detection event
+PASS: The synchronized edge image is displayed
+
+PASS: cloudedge device integration and genuine screenshots
+

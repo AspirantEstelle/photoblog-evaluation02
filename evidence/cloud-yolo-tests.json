@@ -1,0 +1,90 @@
+{
+  "tested_at": "2026-11-05T00:53:27.539793+00:00",
+  "checks": [
+    {
+      "name": "expected_https_cloud_origin",
+      "passed": true
+    },
+    {
+      "name": "deployed_evaluation02_branding",
+      "passed": true
+    },
+    {
+      "name": "new_server_exposes_json_etag",
+      "passed": true
+    },
+    {
+      "name": "actual_yolov5_inference_completed",
+      "passed": true,
+      "source": "YOLOv5/data/images/zidane.jpg",
+      "model": "YOLOv5s v7.0",
+      "device": "cpu"
+    },
+    {
+      "name": "one_real_detection_queued",
+      "passed": true
+    },
+    {
+      "name": "inference_detected_person_and_tie",
+      "passed": true
+    },
+    {
+      "name": "actual_https_post_created",
+      "passed": true,
+      "status": 201
+    },
+    {
+      "name": "cloud_post_contains_detection",
+      "passed": true
+    },
+    {
+      "name": "cloud_image_uses_same_https_origin",
+      "passed": true
+    },
+    {
+      "name": "served_image_exactly_matches_yolo_jpeg",
+      "passed": true,
+      "source_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f",
+      "served_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f"
+    },
+    {
+      "name": "cloud_etag_matches_json_bytes",
+      "passed": true,
+      "proxy_content_encoding": "gzip",
+      "weak_etag": true
+    },
+    {
+      "name": "cloud_conditional_get_returns304",
+      "passed": true,
+      "status": 304,
+      "body_bytes": 0
+    },
+    {
+      "name": "cloud_duplicate_replays_same_post",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "only_one_new_cloud_post",
+      "passed": true,
+      "before": 1,
+      "after": 2
+    }
+  ],
+  "base_url": "https://gyusik.pythonanywhere.com",
+  "posts_before": 1,
+  "event_id": "448bb5ca-d132-4cb1-8b41-7889961e89e3",
+  "title": "YOLO 감지: person, tie",
+  "image_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f",
+  "image_bytes": 24501,
+  "post_id": 2,
+  "passed": true,
+  "resumed_at": "2026-11-05T00:55:57.197431+00:00",
+  "verification_note": "PythonAnywhere gzip responses use weak ETags; compare the unchanged digest after removing the optional W/ prefix.",
+  "queue_counts": {
+    "pending": 0,
+    "inflight": 0,
+    "sent": 1,
+    "failed": 0
+  }
+}

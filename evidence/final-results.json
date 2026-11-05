@@ -1,0 +1,190 @@
+{
+  "updated_at": "2026-11-05T00:58:53.987718+00:00",
+  "repository_url": "https://github.com/AspirantEstelle/photoblog-evaluation02",
+  "cloud_url": "https://gyusik.pythonanywhere.com/",
+  "submission_complete": false,
+  "criteria": [
+    {
+      "number": 1,
+      "criterion": "Required root folders and evaluation02 Word report",
+      "status": "pending_report",
+      "passed": null,
+      "evidence": []
+    },
+    {
+      "number": 2,
+      "criterion": "Separate GitHub repository with final source and embedded-image report",
+      "status": "pending_final_remote_verification",
+      "passed": null,
+      "evidence": []
+    },
+    {
+      "number": 3,
+      "criterion": "Unmodified YOLOv5 baseline with real webcam",
+      "status": "passed",
+      "passed": true,
+      "evidence": [
+        "03-webcam-baseline.png",
+        "03-webcam-baseline-log.txt",
+        "edge-baseline-inference.txt"
+      ]
+    },
+    {
+      "number": 4,
+      "criterion": "Class appearance detection and authenticated multipart upload implementation",
+      "status": "passed",
+      "passed": true,
+      "evidence": [
+        "04-detect-integration.png",
+        "04-changedetection.png",
+        "edge-tests.txt"
+      ]
+    },
+    {
+      "number": 5,
+      "criterion": "Local API displays real YOLO upload",
+      "status": "passed",
+      "passed": true,
+      "evidence": [
+        "05-local-api.png",
+        "edge-local-upload.json"
+      ]
+    },
+    {
+      "number": 6,
+      "criterion": "Local blog displays detection image",
+      "status": "passed",
+      "passed": true,
+      "evidence": [
+        "06-local-blog.png",
+        "06-local-detail.png",
+        "edge-local-upload.json"
+      ]
+    },
+    {
+      "number": 7,
+      "criterion": "Android displays YOLO-uploaded image",
+      "status": "passed",
+      "passed": true,
+      "evidence": [
+        "android/edge-image.png",
+        "android/edge-detail.png",
+        "android-edge.txt"
+      ]
+    },
+    {
+      "number": 8,
+      "criterion": "PythonAnywhere API displays real HTTPS YOLO upload",
+      "status": "passed",
+      "passed": true,
+      "evidence": [
+        "08-cloud-api.png",
+        "cloud-yolo-tests.json",
+        "edge-cloud-inference.txt"
+      ]
+    },
+    {
+      "number": 9,
+      "criterion": "PythonAnywhere blog displays the uploaded image",
+      "status": "passed",
+      "passed": true,
+      "evidence": [
+        "09-cloud-blog.png",
+        "09-cloud-detail.png",
+        "cloud-yolo-tests.json"
+      ]
+    },
+    {
+      "number": 10,
+      "criterion": "Two advanced convenience features",
+      "status": "passed",
+      "passed": true,
+      "evidence": [
+        "android/cache-304.png",
+        "android/cache-recovered.png",
+        "android/cache-offline.png",
+        "android/cache-status.png",
+        "10-queue-offline.png",
+        "10-queue-recovered.png",
+        "delivery-http-tests.json",
+        "edge-outage-recovered.json"
+      ]
+    }
+  ],
+  "word_report": {
+    "status": "pending",
+    "exists": true,
+    "visual_qa_verified": false,
+    "embedded_image_references": 21,
+    "external_image_links": false,
+    "sha256": "7e2a2e6f74f771b8909b55e1d7edbeb368f505764a9b282f0235d1b693363aac"
+  },
+  "tests": {
+    "django": {
+      "tests": 33,
+      "seconds": 139.254,
+      "passed": true,
+      "evidence": "server-tests.txt"
+    },
+    "android_jvm": {
+      "tests": 29,
+      "passed": true,
+      "evidence": "android-unit-results.json"
+    },
+    "edge": {
+      "tests": 15,
+      "seconds": 2.033,
+      "passed": true,
+      "evidence": "edge-tests.txt"
+    },
+    "local_http": {
+      "checks": 15,
+      "passed": true,
+      "evidence": "delivery-http-tests.json"
+    },
+    "actual_outage_recovery": {
+      "checks": 14,
+      "passed": true,
+      "evidence": "edge-outage-recovered.json"
+    },
+    "actual_cloud_yolo": {
+      "status": "passed",
+      "checks": 14,
+      "evidence": "cloud-yolo-tests.json"
+    },
+    "android_device": {
+      "edge": true,
+      "offline": true,
+      "cacheaudit": true,
+      "cloudedge": true
+    }
+  },
+  "server_coverage": {
+    "percent": 98,
+    "statements": 197,
+    "branches": 30,
+    "scope": "blog only; excludes tests, migrations, management commands, and Android/YOLO code"
+  },
+  "android_lint": {
+    "errors": 0,
+    "warnings": 20
+  },
+  "additional_features": [
+    {
+      "name": "Verified bounded offline cache with conditional HTTP synchronization",
+      "server": "JSON ETags and correct 304/invalidation",
+      "android": "Server-isolated atomic storage, SHA-256 integrity, 32 MiB/120-entry limit, LRU cleanup, explicit offline state"
+    },
+    {
+      "name": "Durable edge upload outbox with server duplicate suppression",
+      "edge": "SQLite payload persistence, stable UUID, worker leases, restart recovery, bounded retries",
+      "server": "Author-scoped event receipt; identical retry200, changed payload409, deleted original410"
+    }
+  ],
+  "baseline_detect_py_unchanged": true,
+  "notes": [
+    "Webcam baseline and fixture-based integration both use the actual YOLOv5s model.",
+    "Cloud proxy weakens ETags for gzip; unchanged digest and conditional304 were independently verified.",
+    "Submission/report gates are separate from runtime tests and require visual QA plus final GitHub verification."
+  ]
+}

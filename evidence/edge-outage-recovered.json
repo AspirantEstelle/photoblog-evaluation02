@@ -1,0 +1,93 @@
+{
+  "tested_at": "2026-11-05T00:48:08.963938+00:00",
+  "base_url": "http://127.0.0.1:8000",
+  "uses_real_yolo_event": true,
+  "uses_production_upload_worker": true,
+  "checks": [
+    {
+      "name": "one_persisted_pending_yolo_event",
+      "passed": true
+    },
+    {
+      "name": "event_is_pending_after_actual_connection_failure",
+      "passed": true,
+      "initial_state": "pending",
+      "previous_attempts": 1
+    },
+    {
+      "name": "retained_jpeg_payload_present",
+      "passed": true
+    },
+    {
+      "name": "new_process_reloaded_event_and_observed_outage",
+      "passed": true,
+      "attempts": 2,
+      "state": "pending"
+    },
+    {
+      "name": "automatic_recovery_sent_same_event_uuid",
+      "passed": true,
+      "event_id": "7c4980d5-0d59-4e3b-9dca-eb3083e55cad",
+      "state": "sent",
+      "attempts": 5,
+      "post_id": 4
+    },
+    {
+      "name": "successful_send_released_queued_image_blob",
+      "passed": true
+    },
+    {
+      "name": "exactly_one_new_post_after_recovery",
+      "passed": true,
+      "before": 2,
+      "after": 3
+    },
+    {
+      "name": "new_post_has_real_yolo_classes",
+      "passed": true,
+      "title": "YOLO 감지: person, tie"
+    },
+    {
+      "name": "new_post_preserves_original_text",
+      "passed": true
+    },
+    {
+      "name": "served_image_is_on_local_test_server",
+      "passed": true
+    },
+    {
+      "name": "served_jpeg_exactly_matches_persisted_yolo_bytes",
+      "passed": true,
+      "original_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f",
+      "served_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f"
+    },
+    {
+      "name": "actual_duplicate_delivery_returns_same_post",
+      "passed": true,
+      "status": 200,
+      "same_post_id": 4
+    },
+    {
+      "name": "server_marks_duplicate_as_replayed",
+      "passed": true
+    },
+    {
+      "name": "duplicate_did_not_add_another_post",
+      "passed": true,
+      "after_replay": 3
+    }
+  ],
+  "event_id": "7c4980d5-0d59-4e3b-9dca-eb3083e55cad",
+  "original_image_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f",
+  "original_image_bytes": 24501,
+  "original_title": "YOLO 감지: person, tie",
+  "posts_before_recovery": 2,
+  "post_id": 4,
+  "queue_after_recovery": {
+    "pending": 0,
+    "inflight": 0,
+    "sent": 1,
+    "failed": 0
+  },
+  "passed": true
+}
