@@ -1,0 +1,144 @@
+{
+  "jvm_tests": 29,
+  "suites": [
+    {
+      "suite": "com.example.photoviewer.EvidenceCacheTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "cases": [
+        {
+          "name": "clearingOneServerPreservesAnother",
+          "passed": true
+        },
+        {
+          "name": "leastRecentlyUsedImageIsEvicted",
+          "passed": true
+        },
+        {
+          "name": "atomicReplacementHasNoMixedBodyAndEtag",
+          "passed": true
+        },
+        {
+          "name": "copiedEntryCannotCrossServerBoundary",
+          "passed": true
+        },
+        {
+          "name": "incompleteTemporaryFileIsRemovedOnRestart",
+          "passed": true
+        },
+        {
+          "name": "tamperedPayloadIsDiscardedInsteadOfDisplayed",
+          "passed": true
+        },
+        {
+          "name": "rejectedWritePreservesExistingVersion",
+          "passed": true
+        },
+        {
+          "name": "authoritativeFeedPrunesDeletedImagesOnlyInSelectedServer",
+          "passed": true
+        },
+        {
+          "name": "ignoresOnlyTrailingServerSlash",
+          "passed": true
+        },
+        {
+          "name": "feedIsKeptBeforeOlderImagesUnderPressure",
+          "passed": true
+        },
+        {
+          "name": "survivesProcessRestartWithBodyAndValidatorTogether",
+          "passed": true
+        },
+        {
+          "name": "globalByteLimitAppliesAcrossServers",
+          "passed": true
+        },
+        {
+          "name": "twoServersCannotReadEachOthersFeedOrImage",
+          "passed": true
+        },
+        {
+          "name": "truncatedEntryCannotEscapeIntegrityCheck",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "suite": "com.example.photoviewer.FeedClientTest",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "cases": [
+        {
+          "name": "repeated304WithoutCacheIsNotSuccessfulSynchronization",
+          "passed": true
+        },
+        {
+          "name": "disconnectionReturnsExplicitlyStaleVerifiedData",
+          "passed": true
+        },
+        {
+          "name": "storageFailureDoesNotHideFreshNetworkDataOrMarkItOffline",
+          "passed": true
+        },
+        {
+          "name": "invalidCachedJsonDoesNotSendValidator",
+          "passed": true
+        },
+        {
+          "name": "modified200ReplacesOldFeedAndValidator",
+          "passed": true
+        },
+        {
+          "name": "noCacheAndNoNetworkReportsFailure",
+          "passed": true
+        },
+        {
+          "name": "corruptedCacheDoesNotSendStaleValidator",
+          "passed": true
+        },
+        {
+          "name": "serverSwitchDoesNotSendAnotherServersEtag",
+          "passed": true
+        },
+        {
+          "name": "initialNetworkDataIsUsableEvenWhenItCannotBeCached",
+          "passed": true
+        },
+        {
+          "name": "firstRequestStoresFeedAndEtag",
+          "passed": true
+        },
+        {
+          "name": "deletedServerPostsReplaceCachedFeedWithEmptyList",
+          "passed": true
+        },
+        {
+          "name": "conditional304ReusesVerifiedBodyWithoutReplacingWithEmptyResponse",
+          "passed": true
+        },
+        {
+          "name": "unexpected304WithoutCacheRetriesWithoutValidator",
+          "passed": true
+        },
+        {
+          "name": "timestampWriteFailureAfter304StillUsesValidatedOnlineFeed",
+          "passed": true
+        },
+        {
+          "name": "malformedResponseCannotOverwriteGoodOfflineData",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "lint": {
+    "errors": 0,
+    "warnings": 20
+  },
+  "app_id": "com.example.photoviewer02",
+  "apk_sha256": "527a87cea705f8091e84a549ce02631cb29d196174d1dad726f3d4dc4b0c68fb",
+  "android_test_apk_sha256": "9d5afb773a066d2e9117dd332883010f10bd9891c8e1025466f1cf7f41d61212"
+}

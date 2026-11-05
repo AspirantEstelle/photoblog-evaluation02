@@ -1,0 +1,8 @@
+[run]
+source = blog
+omit = */migrations/*, */tests.py, */management/*, */__init__.py
+branch = True
+[report]
+show_missing = True
+[html]
+directory = coverage_html

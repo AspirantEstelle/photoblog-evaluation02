@@ -1,0 +1,86 @@
+{
+  "tested_at": "2026-11-05T00:31:02.976143+00:00",
+  "base_url": "http://127.0.0.1:8000",
+  "event_id": "e8d9dc77-cc38-48c8-96fe-88345b2bdfbf",
+  "image_sha256": "331a50f9ed23ec5f939eb6226561fc514fd9f040dcc6195c21e675fd8bba6353",
+  "checks": [
+    {
+      "name": "first_event_created",
+      "passed": true,
+      "status": 201
+    },
+    {
+      "name": "created_post_matches_own_title",
+      "passed": true
+    },
+    {
+      "name": "new_event_replay_header",
+      "passed": true
+    },
+    {
+      "name": "identical_retry_reuses_post",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "retry_replay_header",
+      "passed": true
+    },
+    {
+      "name": "changed_payload_conflict",
+      "passed": true,
+      "status": 409
+    },
+    {
+      "name": "event_occurs_once_in_list",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "list_etag_matches_body",
+      "passed": true
+    },
+    {
+      "name": "detail_etag_matches_body",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "private_cache_revalidation",
+      "passed": true
+    },
+    {
+      "name": "conditional_get_304_empty_body",
+      "passed": true,
+      "status": 304,
+      "body_bytes": 0
+    },
+    {
+      "name": "own_temporary_post_deleted",
+      "passed": true,
+      "status": 204
+    },
+    {
+      "name": "deleted_post_not_found",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "name": "late_retry_cannot_recreate_deleted_event",
+      "passed": true,
+      "status": 410
+    },
+    {
+      "name": "delete_invalidates_list_cache",
+      "passed": true,
+      "status": 200
+    }
+  ],
+  "cleanup": {
+    "needed": true,
+    "completed": true
+  },
+  "post_id": 2,
+  "duration_seconds": 0.553,
+  "passed": true
+}

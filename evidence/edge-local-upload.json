@@ -1,0 +1,15 @@
+{
+  "actual_model_inference": true,
+  "baseline_detect_py_unchanged": true,
+  "before_count": 1,
+  "after_count": 2,
+  "new_post_id": 3,
+  "title": "YOLO 감지: person, bus",
+  "saved_image_matches_server_bytes": true,
+  "queue_counts": {
+    "pending": 0,
+    "inflight": 0,
+    "sent": 1,
+    "failed": 0
+  }
+}

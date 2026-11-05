@@ -1,0 +1,30 @@
+test_camera_histories_are_independent (test_edge.EdgeTests.test_camera_histories_are_independent) ... ok
+test_class_appearance_repeated_presence_disappearance_and_reappearance (test_edge.EdgeTests.test_class_appearance_repeated_presence_disappearance_and_reappearance) ... ok
+test_expired_worker_cannot_modify_explicitly_retried_event (test_edge.EdgeTests.test_expired_worker_cannot_modify_explicitly_retried_event) ... ok
+test_expired_worker_lease_recovers_after_crash (test_edge.EdgeTests.test_expired_worker_lease_recovers_after_crash) ... ok
+test_external_http_and_embedded_credentials_are_rejected (test_edge.EdgeTests.test_external_http_and_embedded_credentials_are_rejected) ... ok
+test_network_failure_is_delayed_then_replayed_with_identical_key_payload (test_edge.EdgeTests.test_network_failure_is_delayed_then_replayed_with_identical_key_payload) ... PENDING event=3d6db05c-d0ae-4cfd-b5b0-215886a149e7 attempt=1 reason=ConnectionError
+ok
+test_old_worker_cannot_override_new_lease_result (test_edge.EdgeTests.test_old_worker_cannot_override_new_lease_result) ... ok
+test_permanent_http_failures_require_explicit_retry (test_edge.EdgeTests.test_permanent_http_failures_require_explicit_retry) ... FAILED event=5107cfea-2559-4725-b4e7-064437df195a attempt=1 reason=HTTP 400
+FAILED event=28a0f00e-89bd-4188-abb6-d020eb4d3979 attempt=1 reason=HTTP 401
+FAILED event=0cf180d4-1617-4a12-86eb-1d033571283a attempt=1 reason=HTTP 403
+FAILED event=022129f4-103e-4b3f-8331-f0ae154aa53c attempt=1 reason=HTTP 409
+FAILED event=067d6fb7-e8b2-4950-b597-07905a963c2d attempt=1 reason=HTTP 410
+FAILED event=61bef533-f1d3-4e0a-81ac-4ced37340595 attempt=1 reason=HTTP 302
+ok
+test_queue_size_limit_preserves_existing_event (test_edge.EdgeTests.test_queue_size_limit_preserves_existing_event) ... ok
+test_restart_preserves_uuid_timestamp_and_jpeg_payload (test_edge.EdgeTests.test_restart_preserves_uuid_timestamp_and_jpeg_payload) ... ok
+test_retry_after_is_bounded (test_edge.EdgeTests.test_retry_after_is_bounded) ... PENDING event=a4ac62ff-02b5-47da-8667-3bbc8fa51455 attempt=1 reason=HTTP 429
+ok
+test_status_page_reads_real_state_and_escapes_text (test_edge.EdgeTests.test_status_page_reads_real_state_and_escapes_text) ... ok
+test_success_releases_blob_and_server_queues_are_isolated (test_edge.EdgeTests.test_success_releases_blob_and_server_queues_are_isolated) ... ok
+test_transient_http_retry_and_attempt_limit (test_edge.EdgeTests.test_transient_http_retry_and_attempt_limit) ... PENDING event=e87b566e-54f4-48dd-a462-9b298e0ba182 attempt=1 reason=HTTP 503
+FAILED event=e87b566e-54f4-48dd-a462-9b298e0ba182 attempt=2 reason=HTTP 429
+ok
+test_two_workers_do_not_claim_same_event (test_edge.EdgeTests.test_two_workers_do_not_claim_same_event) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 2.033s
+
+OK

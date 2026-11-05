@@ -1,0 +1,78 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+Found 33 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: messages, rest_framework, staticfiles
+  Apply all migrations: admin, auth, authtoken, blog, contenttypes, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying authtoken.0001_initial... OK
+  Applying authtoken.0002_auto_20160226_1747... OK
+  Applying authtoken.0003_tokenproxy... OK
+  Applying authtoken.0004_alter_tokenproxy_options... OK
+  Applying blog.0001_initial... OK
+  Applying blog.0002_post_image... OK
+  Applying blog.0003_alter_post_image... OK
+  Applying blog.0004_alter_post_image... OK
+  Applying blog.0005_upload_receipt... OK
+test_bad_keys_and_unauthenticated_delivery_are_rejected (blog.tests.ConditionalDeliveryTests.test_bad_keys_and_unauthenticated_delivery_are_rejected) ... ok
+test_browsable_html_is_never_revalidated_as_json (blog.tests.ConditionalDeliveryTests.test_browsable_html_is_never_revalidated_as_json) ... ok
+test_deleted_event_is_not_recreated_by_a_late_retry (blog.tests.ConditionalDeliveryTests.test_deleted_event_is_not_recreated_by_a_late_retry) ... ok
+test_edit_image_and_delete_invalidate_list_and_detail (blog.tests.ConditionalDeliveryTests.test_edit_image_and_delete_invalidate_list_and_detail) ... ok
+test_etag_matches_actual_json_and_304_has_no_body (blog.tests.ConditionalDeliveryTests.test_etag_matches_actual_json_and_304_has_no_body) ... ok
+test_head_and_detail_etags (blog.tests.ConditionalDeliveryTests.test_head_and_detail_etags) ... ok
+test_idempotency_ignores_read_only_author_and_creation_date (blog.tests.ConditionalDeliveryTests.test_idempotency_ignores_read_only_author_and_creation_date) ... ok
+test_invalid_authentication_is_not_hidden_by_cached_response (blog.tests.ConditionalDeliveryTests.test_invalid_authentication_is_not_hidden_by_cached_response) ... ok
+test_new_post_and_search_produce_correct_representations (blog.tests.ConditionalDeliveryTests.test_new_post_and_search_produce_correct_representations) ... ok
+test_normal_post_without_key_remains_supported (blog.tests.ConditionalDeliveryTests.test_normal_post_without_key_remains_supported) ... ok
+test_replayed_event_keeps_one_post_and_its_exact_image (blog.tests.ConditionalDeliveryTests.test_replayed_event_keeps_one_post_and_its_exact_image) ... ok
+test_same_event_different_payload_is_conflict (blog.tests.ConditionalDeliveryTests.test_same_event_different_payload_is_conflict) ... ok
+test_same_uuid_is_scoped_to_each_authenticated_owner (blog.tests.ConditionalDeliveryTests.test_same_uuid_is_scoped_to_each_authenticated_owner) ... ok
+test_temporary_database_lock_rolls_back_event_key_for_retry (blog.tests.ConditionalDeliveryTests.test_temporary_database_lock_rolls_back_event_key_for_retry) ... ok
+test_validation_failure_does_not_consume_the_event_key (blog.tests.ConditionalDeliveryTests.test_validation_failure_does_not_consume_the_event_key) ... ok
+test_weak_listed_and_wildcard_validators (blog.tests.ConditionalDeliveryTests.test_weak_listed_and_wildcard_validators) ... ok
+test_anonymous_write_rejected (blog.tests.PhotoBlogTests.test_anonymous_write_rejected) ... ok
+test_detail_and_not_found (blog.tests.PhotoBlogTests.test_detail_and_not_found) ... ok
+test_invalid_image_rejected (blog.tests.PhotoBlogTests.test_invalid_image_rejected) ... ok
+test_list_is_array_with_absolute_image_url (blog.tests.PhotoBlogTests.test_list_is_array_with_absolute_image_url) ... ok
+test_missing_image_and_blank_title (blog.tests.PhotoBlogTests.test_missing_image_and_blank_title) ... ok
+test_model_publish_and_string (blog.tests.PhotoBlogTests.test_model_publish_and_string) ... ok
+test_multipart_create_saves_image_and_owner (blog.tests.PhotoBlogTests.test_multipart_create_saves_image_and_owner) ... ok
+test_other_author_cannot_update_or_delete (blog.tests.PhotoBlogTests.test_other_author_cannot_update_or_delete) ... ok
+test_oversized_and_unsupported_image (blog.tests.PhotoBlogTests.test_oversized_and_unsupported_image) ... ok
+test_owner_can_update_and_delete (blog.tests.PhotoBlogTests.test_owner_can_update_and_delete) ... ok
+test_real_oversized_upload_rejected_by_web_and_api (blog.tests.PhotoBlogTests.test_real_oversized_upload_rejected_by_web_and_api) ... ok
+test_search_and_options (blog.tests.PhotoBlogTests.test_search_and_options) ... ok
+test_staff_can_manage (blog.tests.PhotoBlogTests.test_staff_can_manage) ... ok
+test_token_login (blog.tests.PhotoBlogTests.test_token_login) ... ok
+test_web_create_edit_and_permissions (blog.tests.PhotoBlogTests.test_web_create_edit_and_permissions) ... ok
+test_web_list_search_detail (blog.tests.PhotoBlogTests.test_web_list_search_detail) ... ok
+test_web_rejects_image_format_the_app_cannot_display (blog.tests.PhotoBlogTests.test_web_rejects_image_format_the_app_cannot_display) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 139.254s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+  Applying sessions.0001_initial... OK
+System check identified no issues (0 silenced).

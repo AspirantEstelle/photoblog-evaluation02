@@ -1,0 +1,1 @@
+{% extends 'blog/base.html' %}{% block content %}<h1>포토 블로그 로그인</h1><form method="post" class="editor">{% csrf_token %}{{ form.as_p }}<button>로그인</button></form>{% endblock %}

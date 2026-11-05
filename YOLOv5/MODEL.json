@@ -1,0 +1,6 @@
+{
+  "url": "https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5s.pt",
+  "sha256": "8b3b748c1e592ddd8868022e8732fde20025197328490623cc16c6f24d0782ee",
+  "bytes": 14808437,
+  "source": "Official Ultralytics YOLOv5 v7.0 release asset; COCO pretrained yolov5s"
+}

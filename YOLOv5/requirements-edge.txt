@@ -1,0 +1,19 @@
+# Tested inference environment: Python 3.12, Windows x64, CPU.
+# Install torch==2.5.1 torchvision==0.20.1 from https://download.pytorch.org/whl/cpu first.
+torch==2.5.1
+torchvision==0.20.1
+setuptools==75.3.2
+numpy==1.26.4
+opencv-python==4.10.0.84
+Pillow==11.0.0
+PyYAML==6.0.2
+requests==2.32.3
+scipy==1.14.1
+pandas==2.2.3
+matplotlib==3.9.2
+seaborn==0.13.2
+psutil==6.1.0
+tqdm==4.67.1
+GitPython==3.1.43
+ipython==8.29.0
+thop==0.1.1.post2209072238

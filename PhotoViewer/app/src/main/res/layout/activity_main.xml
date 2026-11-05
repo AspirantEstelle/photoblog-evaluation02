@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/root" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="#F4F7FC" android:padding="20dp">
+<TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="PHOTO VIEWER · EDGE MONITOR" android:textSize="12sp" android:textColor="#2458A6" android:letterSpacing="0.15"/>
+<TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="침입 감지 기록" android:textSize="28sp" android:textStyle="bold" android:textColor="#17263D" android:layout_marginTop="8dp"/>
+<TextView android:id="@+id/server_label" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:textColor="#536680" android:layout_marginTop="8dp"/>
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="12dp">
+<Button android:id="@+id/sync" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="동기화"/>
+<Button android:id="@+id/upload" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="글 올리기"/>
+<Button android:id="@+id/settings" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="설정"/>
+</LinearLayout>
+<EditText android:id="@+id/search" android:layout_width="match_parent" android:layout_height="48dp" android:hint="제목 또는 본문 검색" android:singleLine="true" android:inputType="text" android:autofillHints=""/>
+<ProgressBar android:id="@+id/progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="4dp" android:indeterminate="true" android:visibility="gone"/>
+<TextView android:id="@+id/status" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="12dp" android:paddingBottom="12dp" android:text="동기화를 눌러 서버의 사진을 불러오세요." android:textColor="#536680"/>
+<Button android:id="@+id/cache" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="오프라인 보관함"/>
+<androidx.recyclerview.widget.RecyclerView android:id="@+id/posts" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+</LinearLayout>

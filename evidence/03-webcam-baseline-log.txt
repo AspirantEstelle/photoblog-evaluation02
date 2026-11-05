@@ -1,0 +1,639 @@
+[34m[1mdetect: [0mweights=['yolov5s.pt'], source=0, data=data\coco128.yaml, imgsz=[640, 640], conf_thres=0.25, iou_thres=0.45, max_det=1000, device=cpu, view_img=False, save_txt=False, save_conf=False, save_crop=False, nosave=True, classes=None, agnostic_nms=False, augment=False, visualize=False, update=False, project=C:\Users\Loleutel\Documents\Codex\2026-09-28\new-chat\work\evaluation02\edge\inference, name=baseline-webcam, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False, vid_stride=1
+YOLOv5  2026-11-5 Python-3.12.14 torch-2.5.1+cpu CPU
+
+C:\Users\Loleutel\Documents\Codex\2026-09-28\new-chat\outputs\photoblog-evaluation02\YOLOv5\models\experimental.py:79: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ckpt = torch.load(attempt_download(w), map_location='cpu')  # load
+Fusing layers... 
+YOLOv5s summary: 213 layers, 7225885 parameters, 0 gradients, 16.4 GFLOPs
+1/1: 0...  Success (inf frames 640x480 at 30.00 FPS)
+
+0: 480x640 1 person, 251.1ms
+0: 480x640 1 person, 190.6ms
+0: 480x640 1 person, 1 donut, 178.3ms
+0: 480x640 1 person, 141.4ms
+0: 480x640 1 person, 183.1ms
+0: 480x640 1 person, 236.5ms
+0: 480x640 1 person, 184.8ms
+0: 480x640 1 person, 154.0ms
+0: 480x640 1 person, 151.1ms
+0: 480x640 1 person, 118.6ms
+0: 480x640 1 person, 113.5ms
+0: 480x640 1 person, 112.4ms
+0: 480x640 1 person, 113.0ms
+0: 480x640 1 person, 106.3ms
+0: 480x640 1 person, 1 knife, 113.9ms
+0: 480x640 1 person, 136.4ms
+0: 480x640 1 person, 130.6ms
+0: 480x640 1 person, 118.4ms
+0: 480x640 1 person, 117.6ms
+0: 480x640 1 person, 140.3ms
+0: 480x640 1 person, 127.4ms
+0: 480x640 1 person, 119.7ms
+0: 480x640 1 person, 1 donut, 122.3ms
+0: 480x640 1 person, 126.0ms
+0: 480x640 1 person, 115.4ms
+0: 480x640 1 person, 132.2ms
+0: 480x640 1 person, 112.6ms
+0: 480x640 1 person, 110.3ms
+0: 480x640 1 person, 111.6ms
+0: 480x640 1 person, 118.0ms
+0: 480x640 1 person, 120.7ms
+0: 480x640 1 person, 123.9ms
+0: 480x640 1 person, 132.4ms
+0: 480x640 1 person, 160.3ms
+0: 480x640 1 person, 159.9ms
+0: 480x640 1 person, 155.3ms
+0: 480x640 1 person, 131.8ms
+0: 480x640 1 person, 130.2ms
+0: 480x640 1 person, 139.7ms
+0: 480x640 1 person, 139.3ms
+0: 480x640 1 person, 135.5ms
+0: 480x640 1 person, 1 knife, 114.3ms
+0: 480x640 1 person, 131.7ms
+0: 480x640 1 person, 115.5ms
+0: 480x640 1 person, 116.4ms
+0: 480x640 1 person, 110.7ms
+0: 480x640 1 person, 119.9ms
+0: 480x640 1 person, 112.6ms
+0: 480x640 1 person, 120.5ms
+0: 480x640 1 person, 2 donuts, 119.1ms
+0: 480x640 1 person, 114.0ms
+0: 480x640 1 person, 115.3ms
+0: 480x640 1 person, 114.0ms
+0: 480x640 1 person, 110.6ms
+0: 480x640 1 person, 128.8ms
+0: 480x640 1 person, 131.6ms
+0: 480x640 1 person, 151.6ms
+0: 480x640 1 person, 141.8ms
+0: 480x640 1 person, 131.8ms
+0: 480x640 1 person, 158.3ms
+0: 480x640 1 person, 143.5ms
+0: 480x640 1 person, 138.2ms
+0: 480x640 1 person, 119.7ms
+0: 480x640 1 person, 2 donuts, 126.1ms
+0: 480x640 1 person, 126.6ms
+0: 480x640 1 person, 125.2ms
+0: 480x640 1 person, 136.4ms
+0: 480x640 1 person, 140.8ms
+0: 480x640 1 person, 145.5ms
+0: 480x640 1 person, 133.0ms
+0: 480x640 1 person, 135.6ms
+0: 480x640 1 person, 149.2ms
+0: 480x640 1 person, 156.3ms
+0: 480x640 1 person, 153.0ms
+0: 480x640 1 person, 146.5ms
+0: 480x640 1 person, 141.7ms
+0: 480x640 1 person, 137.8ms
+0: 480x640 1 person, 146.4ms
+0: 480x640 1 person, 1 knife, 128.4ms
+0: 480x640 1 person, 136.8ms
+0: 480x640 1 person, 132.5ms
+0: 480x640 1 person, 140.9ms
+0: 480x640 1 person, 163.0ms
+0: 480x640 1 person, 131.4ms
+0: 480x640 1 person, 150.5ms
+0: 480x640 1 person, 134.2ms
+0: 480x640 1 person, 150.4ms
+0: 480x640 1 person, 144.0ms
+0: 480x640 1 person, 166.1ms
+0: 480x640 1 person, 156.7ms
+0: 480x640 1 person, 148.9ms
+0: 480x640 1 person, 124.8ms
+0: 480x640 1 person, 125.0ms
+0: 480x640 1 person, 144.5ms
+0: 480x640 1 person, 144.5ms
+0: 480x640 1 person, 1 donut, 123.7ms
+0: 480x640 1 person, 1 donut, 121.7ms
+0: 480x640 1 person, 125.0ms
+0: 480x640 1 person, 108.3ms
+0: 480x640 1 person, 118.8ms
+0: 480x640 1 person, 129.8ms
+0: 480x640 1 person, 141.4ms
+0: 480x640 1 person, 117.4ms
+0: 480x640 1 person, 116.6ms
+0: 480x640 1 person, 2 donuts, 128.9ms
+0: 480x640 1 person, 1 donut, 116.3ms
+0: 480x640 1 person, 1 donut, 114.0ms
+0: 480x640 1 person, 127.1ms
+0: 480x640 1 person, 124.1ms
+0: 480x640 1 person, 126.9ms
+0: 480x640 1 person, 111.9ms
+0: 480x640 1 person, 118.9ms
+0: 480x640 1 person, 1 donut, 125.7ms
+0: 480x640 1 person, 129.1ms
+0: 480x640 1 person, 126.9ms
+0: 480x640 1 person, 1 donut, 114.2ms
+0: 480x640 1 person, 129.6ms
+0: 480x640 1 person, 121.8ms
+0: 480x640 1 person, 133.7ms
+0: 480x640 1 person, 1 donut, 125.5ms
+0: 480x640 1 person, 126.6ms
+0: 480x640 1 person, 128.5ms
+0: 480x640 1 person, 132.1ms
+0: 480x640 1 person, 151.2ms
+0: 480x640 1 person, 131.3ms
+0: 480x640 1 person, 139.0ms
+0: 480x640 1 person, 159.6ms
+0: 480x640 1 person, 138.2ms
+0: 480x640 1 person, 151.0ms
+0: 480x640 1 person, 140.7ms
+0: 480x640 1 person, 158.8ms
+0: 480x640 1 person, 154.6ms
+0: 480x640 1 person, 139.0ms
+0: 480x640 1 person, 143.1ms
+0: 480x640 1 person, 153.7ms
+0: 480x640 1 person, 171.8ms
+0: 480x640 1 person, 161.0ms
+0: 480x640 1 person, 342.6ms
+0: 480x640 1 person, 215.6ms
+0: 480x640 1 person, 228.6ms
+0: 480x640 1 person, 150.3ms
+0: 480x640 1 person, 1 tie, 156.4ms
+0: 480x640 1 person, 141.0ms
+0: 480x640 1 person, 1 tie, 129.0ms
+0: 480x640 1 person, 144.8ms
+0: 480x640 1 person, 361.7ms
+0: 480x640 1 person, 1 tie, 181.4ms
+0: 480x640 1 person, 265.2ms
+0: 480x640 1 person, 185.7ms
+0: 480x640 1 person, 132.3ms
+0: 480x640 1 person, 268.7ms
+0: 480x640 1 person, 121.2ms
+0: 480x640 1 person, 98.3ms
+0: 480x640 1 person, 98.8ms
+0: 480x640 1 person, 99.2ms
+0: 480x640 1 person, 95.9ms
+0: 480x640 1 person, 1 banana, 96.8ms
+0: 480x640 1 person, 109.8ms
+0: 480x640 1 person, 103.2ms
+0: 480x640 1 person, 149.3ms
+0: 480x640 1 person, 178.3ms
+0: 480x640 1 person, 165.0ms
+0: 480x640 1 person, 385.9ms
+0: 480x640 1 person, 287.3ms
+0: 480x640 1 person, 379.0ms
+0: 480x640 1 person, 1 tie, 267.2ms
+0: 480x640 1 person, 180.6ms
+0: 480x640 1 person, 526.5ms
+0: 480x640 1 person, 311.7ms
+0: 480x640 1 person, 173.3ms
+0: 480x640 1 person, 268.5ms
+0: 480x640 1 person, 127.6ms
+0: 480x640 1 person, 110.2ms
+0: 480x640 1 person, 194.1ms
+0: 480x640 1 person, 1 tie, 348.3ms
+0: 480x640 1 person, 168.6ms
+0: 480x640 1 person, 171.3ms
+0: 480x640 1 person, 219.9ms
+0: 480x640 1 person, 198.1ms
+0: 480x640 1 person, 553.5ms
+0: 480x640 1 person, 321.7ms
+0: 480x640 1 person, 1 tie, 226.5ms
+0: 480x640 1 person, 249.9ms
+0: 480x640 1 person, 179.0ms
+0: 480x640 1 person, 171.7ms
+0: 480x640 1 person, 206.0ms
+0: 480x640 1 person, 131.9ms
+0: 480x640 1 person, 139.5ms
+0: 480x640 1 person, 146.9ms
+0: 480x640 1 person, 174.2ms
+0: 480x640 1 person, 158.8ms
+0: 480x640 1 person, 130.4ms
+0: 480x640 1 person, 129.5ms
+0: 480x640 1 person, 147.2ms
+0: 480x640 1 person, 141.1ms
+0: 480x640 1 person, 134.3ms
+0: 480x640 1 person, 140.9ms
+0: 480x640 1 person, 171.8ms
+0: 480x640 1 person, 173.0ms
+0: 480x640 1 person, 1 tie, 137.6ms
+0: 480x640 1 person, 154.6ms
+0: 480x640 1 person, 161.2ms
+0: 480x640 1 person, 189.6ms
+0: 480x640 1 person, 157.3ms
+0: 480x640 1 person, 261.8ms
+0: 480x640 1 person, 207.9ms
+0: 480x640 1 person, 193.6ms
+0: 480x640 1 person, 181.5ms
+0: 480x640 1 person, 160.5ms
+0: 480x640 1 person, 132.1ms
+0: 480x640 1 person, 151.4ms
+0: 480x640 1 person, 215.0ms
+0: 480x640 1 person, 268.0ms
+0: 480x640 1 person, 236.9ms
+0: 480x640 1 person, 271.6ms
+0: 480x640 1 person, 199.5ms
+0: 480x640 1 person, 328.1ms
+0: 480x640 1 person, 155.7ms
+0: 480x640 1 person, 1 tie, 140.9ms
+0: 480x640 1 person, 130.0ms
+0: 480x640 1 person, 127.9ms
+0: 480x640 1 person, 181.6ms
+0: 480x640 1 person, 124.3ms
+0: 480x640 1 person, 129.4ms
+0: 480x640 1 person, 344.3ms
+0: 480x640 1 person, 319.2ms
+0: 480x640 1 person, 621.0ms
+0: 480x640 1 person, 249.6ms
+0: 480x640 1 person, 304.7ms
+0: 480x640 1 person, 235.8ms
+0: 480x640 1 person, 190.9ms
+0: 480x640 1 person, 166.4ms
+0: 480x640 1 person, 193.8ms
+0: 480x640 1 person, 241.5ms
+0: 480x640 1 person, 292.3ms
+0: 480x640 1 person, 296.5ms
+0: 480x640 1 person, 249.4ms
+0: 480x640 1 person, 326.4ms
+0: 480x640 1 person, 203.4ms
+0: 480x640 1 person, 1 tie, 348.3ms
+0: 480x640 1 person, 255.8ms
+0: 480x640 1 person, 239.7ms
+0: 480x640 1 person, 136.3ms
+0: 480x640 1 person, 142.4ms
+0: 480x640 1 person, 1 tie, 122.3ms
+0: 480x640 1 person, 229.7ms
+0: 480x640 1 person, 1 tie, 196.5ms
+0: 480x640 1 person, 126.4ms
+0: 480x640 1 person, 143.6ms
+0: 480x640 1 person, 1 tie, 151.8ms
+0: 480x640 1 person, 142.5ms
+0: 480x640 1 person, 136.2ms
+0: 480x640 1 person, 141.3ms
+0: 480x640 1 person, 1 tie, 138.0ms
+0: 480x640 1 person, 134.5ms
+0: 480x640 1 person, 124.6ms
+0: 480x640 1 person, 1 tie, 137.9ms
+0: 480x640 1 person, 135.2ms
+0: 480x640 1 person, 1 tie, 169.7ms
+0: 480x640 1 person, 1 tie, 188.1ms
+0: 480x640 1 person, 1 tie, 141.3ms
+0: 480x640 1 person, 169.4ms
+0: 480x640 1 person, 133.6ms
+0: 480x640 1 person, 120.6ms
+0: 480x640 1 person, 130.8ms
+0: 480x640 1 person, 1 tie, 125.0ms
+0: 480x640 1 person, 1 tie, 133.8ms
+0: 480x640 1 person, 1 tie, 153.3ms
+0: 480x640 1 person, 1 tie, 156.3ms
+0: 480x640 1 person, 1 tie, 141.1ms
+0: 480x640 1 person, 141.2ms
+0: 480x640 1 person, 155.8ms
+0: 480x640 1 person, 187.8ms
+0: 480x640 1 person, 444.5ms
+0: 480x640 1 person, 2 donuts, 175.7ms
+0: 480x640 1 person, 369.6ms
+0: 480x640 1 person, 2 donuts, 182.1ms
+0: 480x640 1 person, 1 donut, 220.8ms
+0: 480x640 1 person, 1 donut, 187.0ms
+0: 480x640 1 person, 173.3ms
+0: 480x640 1 person, 2 donuts, 172.9ms
+0: 480x640 1 person, 169.4ms
+0: 480x640 1 person, 1 donut, 142.3ms
+0: 480x640 1 person, 1 donut, 142.0ms
+0: 480x640 1 person, 2 donuts, 234.3ms
+0: 480x640 1 person, 235.8ms
+0: 480x640 1 person, 2 donuts, 200.9ms
+0: 480x640 1 person, 1 donut, 156.6ms
+0: 480x640 1 person, 137.8ms
+0: 480x640 1 person, 1 donut, 143.0ms
+0: 480x640 1 person, 1 donut, 171.9ms
+0: 480x640 1 person, 2 donuts, 145.1ms
+0: 480x640 1 person, 2 donuts, 145.0ms
+0: 480x640 1 person, 1 donut, 142.5ms
+0: 480x640 1 person, 1 donut, 145.8ms
+0: 480x640 1 person, 1 donut, 143.9ms
+0: 480x640 1 person, 1 donut, 155.0ms
+0: 480x640 1 person, 2 donuts, 234.8ms
+0: 480x640 1 person, 202.6ms
+0: 480x640 1 person, 172.0ms
+0: 480x640 1 person, 2 donuts, 166.7ms
+0: 480x640 1 person, 166.6ms
+0: 480x640 1 person, 1 donut, 146.4ms
+0: 480x640 1 person, 2 donuts, 133.2ms
+0: 480x640 1 person, 2 donuts, 151.1ms
+0: 480x640 1 person, 1 donut, 146.2ms
+0: 480x640 1 person, 148.3ms
+0: 480x640 1 person, 144.1ms
+0: 480x640 1 person, 176.1ms
+0: 480x640 1 person, 144.3ms
+0: 480x640 1 person, 1 donut, 142.8ms
+0: 480x640 1 person, 148.7ms
+0: 480x640 1 person, 174.4ms
+0: 480x640 1 person, 172.2ms
+0: 480x640 1 person, 148.0ms
+0: 480x640 1 person, 1 donut, 143.8ms
+0: 480x640 1 person, 2 donuts, 191.3ms
+0: 480x640 1 person, 136.6ms
+0: 480x640 1 person, 148.1ms
+0: 480x640 1 person, 180.5ms
+0: 480x640 1 person, 2 donuts, 159.2ms
+0: 480x640 1 person, 1 donut, 171.5ms
+0: 480x640 1 person, 2 donuts, 248.4ms
+0: 480x640 1 person, 1 donut, 309.2ms
+0: 480x640 1 person, 268.5ms
+0: 480x640 1 person, 1 donut, 209.5ms
+0: 480x640 1 person, 2 donuts, 237.6ms
+0: 480x640 1 person, 166.6ms
+0: 480x640 1 person, 2 donuts, 166.0ms
+0: 480x640 1 person, 2 donuts, 188.8ms
+0: 480x640 1 person, 169.6ms
+0: 480x640 1 person, 2 donuts, 146.8ms
+0: 480x640 1 person, 2 donuts, 141.2ms
+0: 480x640 1 person, 156.3ms
+0: 480x640 1 person, 1 donut, 163.2ms
+0: 480x640 1 person, 2 donuts, 136.5ms
+0: 480x640 1 person, 146.8ms
+0: 480x640 1 person, 370.4ms
+0: 480x640 1 person, 1 donut, 265.6ms
+0: 480x640 1 person, 1 donut, 237.2ms
+0: 480x640 1 person, 250.7ms
+0: 480x640 1 person, 234.9ms
+0: 480x640 1 person, 2 donuts, 270.3ms
+0: 480x640 1 person, 175.8ms
+0: 480x640 1 person, 2 donuts, 187.3ms
+0: 480x640 1 person, 237.1ms
+0: 480x640 1 person, 2 donuts, 213.4ms
+0: 480x640 1 person, 155.5ms
+0: 480x640 1 person, 1 donut, 142.9ms
+0: 480x640 1 person, 149.3ms
+0: 480x640 1 person, 148.1ms
+0: 480x640 1 person, 153.4ms
+0: 480x640 1 person, 1 donut, 138.5ms
+0: 480x640 1 person, 132.6ms
+0: 480x640 1 person, 1 donut, 135.1ms
+0: 480x640 1 person, 1 donut, 129.7ms
+0: 480x640 1 person, 166.2ms
+0: 480x640 1 person, 2 donuts, 170.2ms
+0: 480x640 1 person, 1 donut, 126.4ms
+0: 480x640 1 person, 2 donuts, 208.7ms
+0: 480x640 1 person, 1 donut, 141.0ms
+0: 480x640 1 person, 1 donut, 134.1ms
+0: 480x640 1 person, 1 donut, 199.3ms
+0: 480x640 1 person, 2 donuts, 196.5ms
+0: 480x640 1 person, 1 donut, 138.7ms
+0: 480x640 1 person, 133.8ms
+0: 480x640 1 person, 1 donut, 160.3ms
+0: 480x640 1 person, 2 donuts, 135.3ms
+0: 480x640 1 person, 2 donuts, 144.4ms
+0: 480x640 1 person, 2 donuts, 154.0ms
+0: 480x640 1 person, 1 donut, 199.1ms
+0: 480x640 1 person, 1 donut, 207.3ms
+0: 480x640 1 person, 1 donut, 174.6ms
+0: 480x640 1 person, 2 donuts, 237.0ms
+0: 480x640 1 person, 2 donuts, 172.9ms
+0: 480x640 1 person, 2 donuts, 165.2ms
+0: 480x640 1 person, 126.8ms
+0: 480x640 1 person, 1 donut, 178.9ms
+0: 480x640 1 person, 254.2ms
+0: 480x640 1 person, 1 donut, 235.7ms
+0: 480x640 1 person, 1 donut, 171.0ms
+0: 480x640 1 person, 230.1ms
+0: 480x640 1 person, 1 donut, 265.3ms
+0: 480x640 1 person, 1 donut, 417.8ms
+0: 480x640 1 person, 327.8ms
+0: 480x640 1 person, 2 donuts, 314.9ms
+0: 480x640 1 person, 1 donut, 215.2ms
+0: 480x640 1 person, 289.8ms
+0: 480x640 1 person, 2 donuts, 168.4ms
+0: 480x640 1 person, 1 donut, 182.3ms
+0: 480x640 1 person, 1 donut, 210.1ms
+0: 480x640 1 person, 452.4ms
+0: 480x640 1 person, 1 donut, 244.3ms
+0: 480x640 1 person, 2 donuts, 361.9ms
+0: 480x640 1 person, 2 donuts, 193.5ms
+0: 480x640 1 person, 1 donut, 142.9ms
+0: 480x640 1 person, 1 donut, 135.9ms
+0: 480x640 1 person, 133.6ms
+0: 480x640 1 person, 135.4ms
+0: 480x640 1 person, 2 donuts, 137.2ms
+0: 480x640 1 person, 1 donut, 142.1ms
+0: 480x640 1 person, 126.3ms
+0: 480x640 1 person, 1 donut, 135.7ms
+0: 480x640 1 person, 127.4ms
+0: 480x640 1 person, 1 donut, 126.6ms
+0: 480x640 1 person, 129.0ms
+0: 480x640 1 person, 2 donuts, 137.3ms
+0: 480x640 1 person, 1 donut, 138.2ms
+0: 480x640 1 person, 2 donuts, 127.1ms
+0: 480x640 1 person, 2 donuts, 130.3ms
+0: 480x640 1 person, 2 donuts, 154.3ms
+0: 480x640 1 person, 1 donut, 125.6ms
+0: 480x640 1 person, 1 donut, 132.6ms
+0: 480x640 1 person, 1 donut, 162.5ms
+0: 480x640 1 person, 2 donuts, 146.2ms
+0: 480x640 1 person, 1 donut, 426.6ms
+0: 480x640 1 person, 1 donut, 157.0ms
+0: 480x640 1 person, 222.4ms
+0: 480x640 1 person, 1 donut, 214.2ms
+0: 480x640 1 person, 377.0ms
+0: 480x640 1 person, 1 donut, 155.8ms
+0: 480x640 1 person, 2 donuts, 171.1ms
+0: 480x640 1 person, 2 donuts, 385.1ms
+0: 480x640 1 person, 2 donuts, 183.8ms
+0: 480x640 1 person, 2 donuts, 175.3ms
+0: 480x640 1 person, 1 donut, 157.6ms
+0: 480x640 1 person, 1 donut, 174.9ms
+0: 480x640 1 person, 148.0ms
+0: 480x640 1 person, 2 donuts, 134.1ms
+0: 480x640 1 person, 2 donuts, 136.8ms
+0: 480x640 1 person, 1 donut, 162.0ms
+0: 480x640 1 person, 2 donuts, 152.6ms
+0: 480x640 1 person, 2 donuts, 177.9ms
+0: 480x640 1 person, 1 donut, 137.4ms
+0: 480x640 1 person, 1 donut, 131.9ms
+0: 480x640 1 person, 160.5ms
+0: 480x640 1 person, 2 donuts, 168.7ms
+0: 480x640 1 person, 166.7ms
+0: 480x640 1 person, 151.6ms
+0: 480x640 1 person, 136.3ms
+0: 480x640 1 person, 154.7ms
+0: 480x640 1 person, 1 donut, 201.9ms
+0: 480x640 1 person, 1 donut, 238.8ms
+0: 480x640 1 person, 1 donut, 185.1ms
+0: 480x640 1 person, 186.4ms
+0: 480x640 1 person, 171.2ms
+0: 480x640 1 person, 157.6ms
+0: 480x640 1 person, 164.3ms
+0: 480x640 1 person, 150.9ms
+0: 480x640 1 person, 190.9ms
+0: 480x640 1 person, 2 donuts, 138.5ms
+0: 480x640 1 person, 138.9ms
+0: 480x640 1 person, 149.0ms
+0: 480x640 1 person, 144.6ms
+0: 480x640 1 person, 134.8ms
+0: 480x640 1 person, 142.5ms
+0: 480x640 1 person, 2 donuts, 144.7ms
+0: 480x640 1 person, 169.6ms
+0: 480x640 1 person, 1 donut, 139.1ms
+0: 480x640 1 person, 1 donut, 139.2ms
+0: 480x640 1 person, 2 donuts, 137.2ms
+0: 480x640 1 person, 181.5ms
+0: 480x640 1 person, 156.4ms
+0: 480x640 1 person, 1 donut, 150.1ms
+0: 480x640 1 person, 2 donuts, 189.0ms
+0: 480x640 1 person, 1 donut, 349.1ms
+0: 480x640 1 person, 188.3ms
+0: 480x640 1 person, 1 donut, 161.0ms
+0: 480x640 1 person, 2 donuts, 151.3ms
+0: 480x640 1 person, 2 donuts, 161.2ms
+0: 480x640 1 person, 2 donuts, 155.6ms
+0: 480x640 1 person, 160.2ms
+0: 480x640 1 person, 158.0ms
+0: 480x640 1 person, 2 donuts, 157.0ms
+0: 480x640 1 person, 2 donuts, 154.4ms
+0: 480x640 1 person, 154.5ms
+0: 480x640 1 person, 159.9ms
+0: 480x640 1 person, 150.2ms
+0: 480x640 1 person, 159.1ms
+0: 480x640 1 person, 2 donuts, 150.3ms
+0: 480x640 1 person, 2 donuts, 145.4ms
+0: 480x640 1 person, 1 donut, 136.0ms
+0: 480x640 1 person, 2 donuts, 152.5ms
+0: 480x640 1 person, 2 donuts, 151.5ms
+0: 480x640 1 person, 1 donut, 133.4ms
+0: 480x640 1 person, 2 donuts, 148.9ms
+0: 480x640 1 person, 148.6ms
+0: 480x640 1 person, 2 donuts, 152.4ms
+0: 480x640 1 person, 149.1ms
+0: 480x640 1 person, 134.0ms
+0: 480x640 1 person, 135.3ms
+0: 480x640 1 person, 2 donuts, 125.2ms
+0: 480x640 1 person, 1 donut, 122.9ms
+0: 480x640 1 person, 117.7ms
+0: 480x640 1 person, 119.7ms
+0: 480x640 1 person, 126.9ms
+0: 480x640 1 person, 1 donut, 119.6ms
+0: 480x640 1 person, 122.3ms
+0: 480x640 1 person, 2 donuts, 121.7ms
+0: 480x640 1 person, 127.5ms
+0: 480x640 1 person, 118.1ms
+0: 480x640 1 person, 123.0ms
+0: 480x640 1 person, 145.9ms
+0: 480x640 1 person, 1 donut, 142.6ms
+0: 480x640 1 person, 129.9ms
+0: 480x640 1 person, 1 donut, 125.7ms
+0: 480x640 1 person, 1 donut, 124.4ms
+0: 480x640 1 person, 1 donut, 128.1ms
+0: 480x640 1 person, 129.5ms
+0: 480x640 1 person, 128.0ms
+0: 480x640 1 person, 124.7ms
+0: 480x640 1 person, 133.5ms
+0: 480x640 1 person, 125.4ms
+0: 480x640 1 person, 137.8ms
+0: 480x640 1 person, 140.3ms
+0: 480x640 1 person, 2 donuts, 141.2ms
+0: 480x640 1 person, 154.4ms
+0: 480x640 1 person, 1 donut, 161.1ms
+0: 480x640 1 person, 2 donuts, 154.4ms
+0: 480x640 1 person, 2 donuts, 150.0ms
+0: 480x640 1 person, 150.8ms
+0: 480x640 1 person, 132.3ms
+0: 480x640 1 person, 135.9ms
+0: 480x640 1 person, 139.2ms
+0: 480x640 1 person, 2 donuts, 119.8ms
+0: 480x640 1 person, 2 donuts, 122.3ms
+0: 480x640 1 person, 124.0ms
+0: 480x640 1 person, 120.0ms
+0: 480x640 1 person, 1 donut, 135.2ms
+0: 480x640 1 person, 1 donut, 130.2ms
+0: 480x640 1 person, 1 donut, 141.5ms
+0: 480x640 1 person, 119.6ms
+0: 480x640 1 person, 1 donut, 120.1ms
+0: 480x640 1 person, 1 donut, 123.3ms
+0: 480x640 1 person, 1 donut, 116.7ms
+0: 480x640 1 person, 123.3ms
+0: 480x640 1 person, 118.3ms
+0: 480x640 1 person, 132.1ms
+0: 480x640 1 person, 144.5ms
+0: 480x640 1 person, 134.0ms
+0: 480x640 1 person, 128.9ms
+0: 480x640 1 person, 128.5ms
+0: 480x640 1 person, 133.7ms
+0: 480x640 1 person, 127.1ms
+0: 480x640 1 person, 133.3ms
+0: 480x640 1 person, 1 donut, 160.4ms
+0: 480x640 1 person, 133.3ms
+0: 480x640 1 person, 1 donut, 122.7ms
+0: 480x640 1 person, 113.5ms
+0: 480x640 1 person, 114.0ms
+0: 480x640 1 person, 112.3ms
+0: 480x640 1 person, 1 donut, 123.4ms
+0: 480x640 1 person, 1 donut, 115.5ms
+0: 480x640 1 person, 126.3ms
+0: 480x640 1 person, 121.0ms
+0: 480x640 1 person, 1 donut, 124.5ms
+0: 480x640 1 person, 116.7ms
+0: 480x640 1 person, 1 donut, 123.5ms
+0: 480x640 1 person, 2 donuts, 125.9ms
+0: 480x640 1 person, 118.8ms
+0: 480x640 1 person, 127.5ms
+0: 480x640 1 person, 2 donuts, 124.0ms
+0: 480x640 1 person, 1 donut, 115.3ms
+0: 480x640 1 person, 1 donut, 123.6ms
+0: 480x640 1 person, 1 donut, 129.6ms
+0: 480x640 1 person, 2 donuts, 148.3ms
+0: 480x640 1 person, 126.6ms
+0: 480x640 1 person, 1 donut, 135.2ms
+0: 480x640 1 person, 121.0ms
+0: 480x640 1 person, 121.8ms
+0: 480x640 1 person, 2 donuts, 121.7ms
+0: 480x640 1 person, 132.6ms
+0: 480x640 1 person, 2 donuts, 151.7ms
+0: 480x640 1 person, 2 donuts, 136.5ms
+0: 480x640 1 person, 138.0ms
+0: 480x640 1 person, 2 donuts, 146.7ms
+0: 480x640 1 person, 149.9ms
+0: 480x640 1 person, 2 donuts, 134.6ms
+0: 480x640 1 person, 3 donuts, 116.0ms
+0: 480x640 1 person, 1 donut, 127.2ms
+0: 480x640 1 person, 3 donuts, 129.0ms
+0: 480x640 1 person, 1 donut, 127.9ms
+0: 480x640 1 person, 2 donuts, 129.1ms
+0: 480x640 1 person, 2 donuts, 118.2ms
+0: 480x640 1 person, 114.1ms
+0: 480x640 1 person, 123.3ms
+0: 480x640 1 person, 121.1ms
+0: 480x640 1 person, 110.4ms
+0: 480x640 1 person, 115.9ms
+0: 480x640 1 person, 118.9ms
+0: 480x640 1 person, 2 donuts, 120.1ms
+0: 480x640 1 person, 2 donuts, 126.1ms
+0: 480x640 1 person, 1 donut, 129.8ms
+0: 480x640 1 person, 117.5ms
+0: 480x640 1 person, 2 donuts, 109.5ms
+0: 480x640 1 person, 2 donuts, 114.0ms
+0: 480x640 1 person, 2 donuts, 118.5ms
+0: 480x640 1 person, 116.0ms
+0: 480x640 1 person, 119.2ms
+0: 480x640 1 person, 117.6ms
+0: 480x640 1 person, 2 donuts, 119.2ms
+0: 480x640 1 person, 2 donuts, 142.5ms
+0: 480x640 1 person, 2 donuts, 146.5ms
+0: 480x640 1 person, 1 donut, 115.1ms
+0: 480x640 1 person, 2 donuts, 118.5ms
+0: 480x640 1 person, 121.3ms
+0: 480x640 1 person, 114.1ms
+0: 480x640 1 person, 1 donut, 121.8ms
+0: 480x640 1 person, 126.0ms
+0: 480x640 1 person, 123.2ms
+0: 480x640 1 person, 136.4ms
+0: 480x640 1 person, 123.7ms
+0: 480x640 1 person, 2 donuts, 131.1ms
+0: 480x640 1 person, 142.9ms
+0: 480x640 1 person, 142.5ms
+0: 480x640 1 person, 123.2ms
+0: 480x640 1 person, 138.5ms
+0: 480x640 1 person, 142.2ms
+0: 480x640 1 person, 136.1ms
+0: 480x640 1 person, 1 donut, 127.6ms
+0: 480x640 1 person, 2 donuts, 121.4ms
+0: 480x640 1 person, 127.3ms
+0: 480x640 1 person, 120.7ms
+0: 480x640 1 person, 115.6ms
+0: 480x640 1 person, 2 donuts, 114.7ms
+0: 480x640 1 person, 2 donuts, 112.9ms
+0: 480x640 1 person, 114.1ms
+0: 480x640 1 person, 1 donut, 135.4ms
+0: 480x640 1 person, 2 donuts, 130.4ms
+Speed: 1.1ms pre-process, 162.0ms inference, 1.4ms NMS per image at shape (1, 3, 640, 640)

@@ -1,0 +1,14 @@
+Name                  Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------
+blog\admin.py            11      2      0      0    82%   13, 16
+blog\apps.py              3      0      0      0   100%
+blog\delivery.py         15      0      2      0   100%
+blog\forms.py            13      0      2      0   100%
+blog\models.py           24      1      0      0    96%   35
+blog\permissions.py       4      0      0      0   100%
+blog\serializers.py      12      0      0      0   100%
+blog\urls.py              6      0      0      0   100%
+blog\validators.py        7      0      4      0   100%
+blog\views.py           102      1     22      1    98%   120
+-----------------------------------------------------------------
+TOTAL                   197      4     30      1    98%

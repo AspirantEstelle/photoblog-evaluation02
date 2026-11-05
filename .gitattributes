@@ -1,0 +1,3 @@
+# Preserve vendored upstream bytes and genuine evidence logs across platforms.
+YOLOv5/** -text whitespace=-blank-at-eof,-blank-at-eol
+evidence/** -text whitespace=-blank-at-eof,-blank-at-eol
