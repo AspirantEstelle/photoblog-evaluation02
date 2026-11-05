@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-05T00:58:53.987718+00:00",
+  "updated_at": "2026-11-05T01:05:20.706191+00:00",
   "repository_url": "https://github.com/AspirantEstelle/photoblog-evaluation02",
   "cloud_url": "https://gyusik.pythonanywhere.com/",
   "submission_complete": false,
@@ -7,8 +7,8 @@
     {
       "number": 1,
       "criterion": "Required root folders and evaluation02 Word report",
-      "status": "pending_report",
-      "passed": null,
+      "status": "passed",
+      "passed": true,
       "evidence": []
     },
     {
@@ -112,12 +112,12 @@
     }
   ],
   "word_report": {
-    "status": "pending",
+    "status": "verified",
     "exists": true,
-    "visual_qa_verified": false,
-    "embedded_image_references": 21,
+    "visual_qa_verified": true,
+    "embedded_image_references": 23,
     "external_image_links": false,
-    "sha256": "7e2a2e6f74f771b8909b55e1d7edbeb368f505764a9b282f0235d1b693363aac"
+    "sha256": "56fe48c765b5134463ba60940c99985ac65d95d2422cf2466518c90cdc0d5b90"
   },
   "tests": {
     "django": {
