@@ -31,8 +31,9 @@ public class MainActivity extends Activity {
     private EditText search, titleInput, bodyInput;
     private ImageView preview;
     private Uri selectedImage;
-    private AlertDialog editor, settingsDialog, cacheDialog;
+    private AlertDialog editor, settingsDialog, cacheDialog, detailDialog;
     private EvidenceCache evidenceCache;
+    private EvidenceCache.Ticket activeTicket;
     volatile int lastNetworkCode;
     volatile boolean lastSyncOffline;
     private long lastValidatedAt;
@@ -47,7 +48,7 @@ public class MainActivity extends Activity {
         super.onCreate(state);
         prefs = getSharedPreferences("photo_viewer", MODE_PRIVATE);
         base = prefs.getString("server", LOCAL);
-        try { evidenceCache = new EvidenceCache(new File(getFilesDir(), "evidence-cache-v2")); }
+        try { evidenceCache = EvidenceCache.open(new File(getFilesDir(), "evidence-cache-v2")); }
         catch(IOException e) { throw new IllegalStateException("캐시 초기화 실패",e); }
         setContentView(R.layout.activity_main);
         View root = findViewById(R.id.root);
@@ -125,14 +126,15 @@ public class MainActivity extends Activity {
     }
     private void loadCache() {
         final String server=base;final int request=++generation;
+        final EvidenceCache.Ticket ticket=activeTicket=evidenceCache.begin(server);
         io.execute(()->{
             try {
                 EvidenceCache.Entry saved=evidenceCache.get(server,EvidenceCache.FEED);
                 if(saved==null)return;
                 JSONArray data;
                 try {data=validFeed(saved.body);}
-                catch(IOException malformed){evidenceCache.remove(server,EvidenceCache.FEED);return;}
-                runOnUiThread(()->{if(request!=generation || isDestroyed())return;
+                catch(IOException malformed){evidenceCache.removeIfCurrent(ticket,EvidenceCache.FEED);return;}
+                runOnUiThread(()->{if(request!=generation || isDestroyed() || !evidenceCache.isCurrent(ticket))return;
                     try {use(data);lastValidatedAt=saved.validatedAt;
                         status.setText("보관한 사진 "+all.size()+"개 · 서버 확인 "+validationTime(lastValidatedAt)+"\n동기화로 최신 내용을 확인하세요.");}
                     catch(Exception e){status.setText("저장된 목록을 읽지 못했어요. 다시 동기화하세요.");}
@@ -143,21 +145,20 @@ public class MainActivity extends Activity {
     public void synchronize() {
         if(busy || isDestroyed() || isFinishing())return;
         final String server=base;final int request=++generation;
+        final EvidenceCache.Ticket ticket=activeTicket=evidenceCache.begin(server);
         setBusy(true,"서버에서 감지 기록을 확인하는 중…");
         io.execute(()->{
             try {
                 FeedClient client=new FeedClient(evidenceCache,MainActivity::getFeed);
-                FeedClient.Result result=client.sync(server,bytes->validFeed(bytes));
+                FeedClient.Result result=client.sync(ticket,bytes->{
+                    JSONArray validated=validFeed(bytes);Set<String> urls=new HashSet<>();
+                    for(int i=0;i<validated.length();i++)urls.add(validated.optJSONObject(i).optString("image"));
+                    return urls;
+                });
                 JSONArray data=validFeed(result.body);
-                Set<String> urls=new HashSet<>();
-                for(int i=0;i<data.length();i++)urls.add(data.getJSONObject(i).optString("image"));
-                String storageWarning=result.error;
-                if(!result.offline && result.error.isEmpty()) {
-                    try {evidenceCache.retainImages(server,urls);}
-                    catch(IOException cleanupFailure){storageWarning="목록은 받았지만 오래된 보관 사진을 정리하지 못했어요.";}
-                }
-                final String warning=storageWarning;
+                final String warning=result.error;
                 runOnUiThread(()->{if(request!=generation || isDestroyed())return;
+                    if(!evidenceCache.isCurrent(ticket)){setBusy(false,"더 최근 요청의 결과를 유지했어요.");return;}
                     try {
                         use(data);lastNetworkCode=result.networkCode;lastSyncOffline=result.offline;
                         lastValidatedAt=result.validatedAt;lastError=warning;
@@ -190,9 +191,10 @@ public class MainActivity extends Activity {
         ScrollView scroll=new ScrollView(this);scroll.addView(details);
         cacheDialog=new AlertDialog.Builder(this).setTitle("오프라인 보관함").setView(scroll)
             .setNegativeButton("닫기",null).setPositiveButton("이 서버 캐시 비우기",(dialog,which)->{
-                final int request=++generation;setBusy(true,"보관함을 비우는 중…");
+                final int request=++generation;final EvidenceCache.Ticket clearTicket=activeTicket=evidenceCache.begin(server);setBusy(true,"보관함을 비우는 중…");
                 io.execute(()->{
-                    try {evidenceCache.clear(server);runOnUiThread(()->{if(request!=generation || isDestroyed())return;
+                    try {boolean cleared=evidenceCache.clearIfCurrent(clearTicket);runOnUiThread(()->{if(request!=generation || isDestroyed())return;
+                        if(!cleared){setBusy(false,"더 최근 요청의 결과를 유지했어요.");return;}
                         all.clear();filter();lastValidatedAt=0;lastNetworkCode=0;lastSyncOffline=false;
                         setBusy(false,"보관함을 비웠어요. 동기화를 눌러 다시 불러오세요.");});}
                     catch(IOException e){runOnUiThread(()->{if(request==generation)fail(e);});}
@@ -240,6 +242,7 @@ public class MainActivity extends Activity {
                 if(!valid || uri.getHost()==null || uri.getUserInfo()!=null || uri.getQuery()!=null || uri.getFragment()!=null || !uri.getPath().isEmpty()) throw new Exception();
                 // The URL listener loads only the selected server's credential.
                 String entered = token.getText().toString().trim();
+                evidenceCache.cancel(activeTicket);
                 base = server; prefs.edit().putString("server",base).apply();
                 prefs.edit().putString(tokenKey(),entered).apply();
                 serverLabel.setText(base); ++generation; all.clear(); filter();lastValidatedAt=0;lastNetworkCode=0;lastSyncOffline=false;
@@ -335,7 +338,7 @@ public class MainActivity extends Activity {
     private void image(ImageView view,String url) {
         view.setImageDrawable(null);view.setTag(url);
         if(url.isEmpty())return;
-        final String server=base;final int request=generation;
+        final String server=base;final int request=generation;final EvidenceCache.Ticket ticket=activeTicket;
         io.execute(()->{
             try {
                 EvidenceCache.Entry saved=evidenceCache.get(server,url);
@@ -354,7 +357,7 @@ public class MainActivity extends Activity {
                     if(check.outWidth<1 || check.outHeight<1)throw new IOException("이미지 형식 오류");
                     synchronized(evidenceCache) {
                         if(request!=generation || isDestroyed())return;
-                        try {evidenceCache.put(server,url,bytes,"");}
+                        try {evidenceCache.putImageIfCurrent(ticket,url,bytes);}
                         catch(IOException storageFailure){ /* Keep displaying the valid downloaded image. */ }
                     }
                 }
@@ -362,8 +365,8 @@ public class MainActivity extends Activity {
                 BitmapFactory.decodeByteArray(bytes,0,bytes.length,opts);opts.inSampleSize=1;
                 while(opts.outWidth/opts.inSampleSize>1200 || opts.outHeight/opts.inSampleSize>1200)opts.inSampleSize*=2;
                 opts.inJustDecodeBounds=false;Bitmap bitmap=BitmapFactory.decodeByteArray(bytes,0,bytes.length,opts);
-                if(bitmap==null){evidenceCache.remove(server,url);throw new IOException("이미지 복원 실패");}
-                runOnUiThread(()->{if(request==generation && !isDestroyed() && url.equals(view.getTag()))view.setImageBitmap(bitmap);});
+                if(bitmap==null){evidenceCache.removeIfCurrent(ticket,url);throw new IOException("이미지 복원 실패");}
+                runOnUiThread(()->{if(request==generation && !isDestroyed() && evidenceCache.isCurrent(ticket) && url.equals(view.getTag()))view.setImageBitmap(bitmap);});
             }catch(Exception ignored){runOnUiThread(()->{if(request==generation && !isDestroyed() && url.equals(view.getTag()))view.setContentDescription("이미지를 불러오지 못했어요.");});}
         });
     }
@@ -372,7 +375,7 @@ public class MainActivity extends Activity {
         box.addView(photo,new LinearLayout.LayoutParams(-1,dp(270)));image(photo,post.optString("image"));
         TextView text=new TextView(this);text.setText(post.optString("text")+"\n\n작성자 "+post.optString("author_name")+" · #"+post.optInt("id"));text.setTextSize(16);box.addView(text);
         ScrollView scroll=new ScrollView(this);scroll.addView(box);
-        new AlertDialog.Builder(this).setTitle(post.optString("title")).setView(scroll).setPositiveButton("닫기",null).show();
+        detailDialog=new AlertDialog.Builder(this).setTitle(post.optString("title")).setView(scroll).setPositiveButton("닫기",null).show();
     }
     private class PostAdapter extends RecyclerView.Adapter<PostHolder> {
         public PostHolder onCreateViewHolder(android.view.ViewGroup parent,int type){
@@ -384,7 +387,7 @@ public class MainActivity extends Activity {
             return new PostHolder(box,image,title,text);
         }
         public void onBindViewHolder(PostHolder holder,int position){
-            JSONObject post=shown.get(position);holder.title.setText(post.optString("title"));holder.text.setText(post.optString("text"));image(holder.photo,post.optString("image"));holder.itemView.setOnClickListener(v->detail(post));
+            JSONObject post=shown.get(position);holder.itemView.setTag(post.optLong("id"));holder.title.setText(post.optString("title"));holder.text.setText(post.optString("text"));image(holder.photo,post.optString("image"));holder.itemView.setOnClickListener(v->detail(post));
         }
         public int getItemCount(){return shown.size();}
     }
@@ -401,7 +404,8 @@ public class MainActivity extends Activity {
         saveDraft();state.putBoolean("editor-open",editor!=null && editor.isShowing());super.onSaveInstanceState(state);
     }
     @Override protected void onDestroy(){
-        ++generation;
+        ++generation;evidenceCache.cancel(activeTicket);
+        if(detailDialog!=null)detailDialog.dismiss();
         if(editor!=null)editor.dismiss();
         if(settingsDialog!=null)settingsDialog.dismiss();
         if(cacheDialog!=null)cacheDialog.dismiss();

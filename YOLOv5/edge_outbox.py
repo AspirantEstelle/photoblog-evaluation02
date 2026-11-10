@@ -192,8 +192,8 @@ class Uploader:
                 if not self.queue.sent(event, post_id):
                     LOG.info('STALE event=%s result ignored after lease expiration', event['event_id'])
                     return {'event_id': event['event_id'], 'state': 'stale'}
-                LOG.info("SENT event=%s post=%s replay=%s", event['event_id'], post_id,
-                         response.headers.get('Idempotency-Replayed', 'unknown'))
+                LOG.info("SENT event=%s post=%s replay=%s http=%s", event['event_id'], post_id,
+                         response.headers.get('Idempotency-Replayed', 'unknown'), response.status_code)
                 return {'event_id': event['event_id'], 'state': 'sent', 'post_id': post_id}
             retryable = response.status_code in (408, 425, 429) or response.status_code >= 500
             try:
@@ -222,28 +222,56 @@ class Uploader:
 
 
 class UploadWorker:
-    def __init__(self, uploader):
+    CLOSE_MAX_EVENTS = 8
+
+    def __init__(self, uploader, *, poll_interval=1):
         self.uploader = uploader
+        self.poll_interval = poll_interval
         self.stop_event = threading.Event()
+        self.wake_event = threading.Event()
+        self.close_deadline = 0
         self.thread = threading.Thread(target=self._run, name='durable-edge-uploader', daemon=True)
 
     def start(self):
         self.thread.start()
         return self
 
+    def notify_committed(self):
+        self.wake_event.set()
+
+    def _attempt(self):
+        try:
+            return self.uploader.flush_once()
+        except Exception:
+            LOG.exception("Outbox worker paused; committed events remain on disk")
+            return None
+
     def _run(self):
         while not self.stop_event.is_set():
-            try:
-                self.uploader.flush_once()
-            except Exception:
-                LOG.exception("Outbox worker paused; committed events remain on disk")
-            self.stop_event.wait(1)
+            self.wake_event.clear()
+            if self.stop_event.is_set():
+                break
+            result = self._attempt()
+            if not result or result['state'] != 'sent':
+                self.wake_event.wait(self.poll_interval)
 
-    def close(self):
+        # A short input can finish between the idle poll and the first upload.
+        # Let this same worker (and Session) attempt already-due records before
+        # exit; don't override backoff or wait through an entire offline queue.
+        for _ in range(self.CLOSE_MAX_EVENTS):
+            if time.monotonic() >= self.close_deadline:
+                break
+            result = self._attempt()
+            if not result or result['state'] != 'sent':
+                break
+
+    def close(self, grace_seconds=5):
+        self.close_deadline = time.monotonic() + grace_seconds
         self.stop_event.set()
-        # At most one authentication + upload request is active; do not drain an
-        # arbitrary backlog during shutdown or share its Session with another thread.
-        self.thread.join(timeout=45)
+        self.wake_event.set()
+        self.thread.join(timeout=grace_seconds)
+        if self.thread.is_alive():
+            LOG.warning('Shutdown deadline reached; the in-flight event remains recoverable')
 
 
 def main():

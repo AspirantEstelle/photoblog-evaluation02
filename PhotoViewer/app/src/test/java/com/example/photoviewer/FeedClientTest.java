@@ -95,11 +95,27 @@ public class FeedClientTest {
         assertFalse(result.offline);assertArrayEquals(bytes("[fresh]"),result.body);assertFalse(result.error.isEmpty());
         assertNull(cache.get(SERVER,EvidenceCache.FEED));
     }
-    @Test public void timestampWriteFailureAfter304StillUsesValidatedOnlineFeed()throws Exception {
+    @Test public void unrelated304ValidatorTriggersUnconditionalRecovery()throws Exception {
         cache.put(SERVER,EvidenceCache.FEED,bytes("[old]"),"one");
-        String oversizedEtag="x".repeat(513);
-        FeedClient.Result result=client(response(304,"",oversizedEtag)).sync(SERVER,JSON_ARRAY);
-        assertFalse(result.offline);assertEquals(304,result.networkCode);assertFalse(result.error.isEmpty());
-        assertArrayEquals(bytes("[old]"),result.body);assertEquals("one",cache.get(SERVER,EvidenceCache.FEED).etag);
+        FeedClient.Result result=client(response(304,"","different"),response(200,"[new]","different")).sync(SERVER,JSON_ARRAY);
+        assertEquals(Arrays.asList("one",""),validators);assertFalse(result.offline);assertEquals(200,result.networkCode);
+        assertArrayEquals(bytes("[new]"),result.body);assertEquals("different",cache.get(SERVER,EvidenceCache.FEED).etag);
+    }
+    @Test public void savedBodyWithoutEtagCannotAcceptUnconditional304()throws Exception {
+        cache.put(SERVER,EvidenceCache.FEED,bytes("[old]"),"");
+        FeedClient.Result result=client(response(304,"","v2"),response(200,"[new]","v2")).sync(SERVER,JSON_ARRAY);
+        assertEquals(Arrays.asList("",""),validators);assertEquals(200,result.networkCode);assertArrayEquals(bytes("[new]"),result.body);
+    }
+    @Test public void twoUnjustified304sNeverRelabelOrRevalidateOldBody()throws Exception {
+        cache.put(SERVER,EvidenceCache.FEED,bytes("[old]"),"");long before=cache.get(SERVER,EvidenceCache.FEED).validatedAt;
+        FeedClient.Result result=client(response(304,"","v2"),response(304,"","v2")).sync(SERVER,JSON_ARRAY);
+        assertTrue(result.offline);assertEquals(before,result.validatedAt);assertEquals("",cache.get(SERVER,EvidenceCache.FEED).etag);
+        assertArrayEquals(bytes("[old]"),cache.get(SERVER,EvidenceCache.FEED).body);
+    }
+    @Test public void weaklyEquivalent304RetainsVerifiedBody()throws Exception {
+        String tag=Character.toString((char)34)+"v1"+(char)34;
+        cache.put(SERVER,EvidenceCache.FEED,bytes("[same]"),"W/"+tag);
+        FeedClient.Result result=client(response(304,"",tag)).sync(SERVER,JSON_ARRAY);
+        assertFalse(result.offline);assertEquals(304,result.networkCode);assertArrayEquals(bytes("[same]"),result.body);
     }
 }

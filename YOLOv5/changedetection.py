@@ -46,7 +46,6 @@ class ChangeDetection:
     def send(self, save_dir, image, appeared):
         now = datetime.now(timezone.utc)
         folder = Path(save_dir) / 'detected' / str(now.year) / f'{now.month:02d}' / f'{now.day:02d}'
-        folder.mkdir(parents=True, exist_ok=True)
         # The lecture sends the annotated frame at 320 x 240.
         frame = cv2.resize(image, (320, 240), interpolation=cv2.INTER_AREA)
         ok, encoded = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 92])
@@ -54,11 +53,15 @@ class ChangeDetection:
             raise RuntimeError('Could not encode the annotated detection image')
         title = ('YOLO 감지: ' + ', '.join(appeared))[:200]
         text = '새로 출현한 객체: ' + ', '.join(appeared)
-        event_id = self.queue.enqueue(self.connection.server, title, text, encoded.tobytes(),
+        jpeg = encoded.tobytes()
+        event_id = self.queue.enqueue(self.connection.server, title, text, jpeg,
                                       captured_at=now.isoformat())
+        if self.worker:
+            self.worker.notify_committed()
         # This archive is a convenience copy; SQLite already owns the durable payload.
         try:
-            (folder / (event_id + '.jpg')).write_bytes(encoded.tobytes())
+            folder.mkdir(parents=True, exist_ok=True)
+            (folder / (event_id + '.jpg')).write_bytes(jpeg)
         except OSError:
             LOG.warning('Archive copy unavailable; event %s remains safely queued', event_id)
         LOG.info('QUEUED event=%s classes=%s', event_id, ','.join(appeared))
@@ -68,5 +71,5 @@ class ChangeDetection:
         if self.worker:
             self.worker.close()
             self.worker = None
-        # Any remaining committed events are resumed by the next run or CLI drain.
+        # Any events outside the worker's shutdown limits remain on disk.
         LOG.info('OUTBOX %s', self.queue.status(self.connection.server)['counts'])

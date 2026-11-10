@@ -1,22 +1,32 @@
 {
-  "updated_at": "2026-11-05T01:06:05.298224+00:00",
+  "updated_at": "2026-11-10T05:13:49.467805+00:00",
   "repository_url": "https://github.com/AspirantEstelle/photoblog-evaluation02",
   "cloud_url": "https://gyusik.pythonanywhere.com/",
-  "submission_complete": true,
+  "submission_complete": false,
+  "revision_checks": {
+    "ordinary_local_upload": true,
+    "ordinary_cloud_upload": true,
+    "matching_android_post": true,
+    "word_contains_local_and_cloud_browser_address_bars": false
+  },
   "criteria": [
     {
       "number": 1,
       "criterion": "Required root folders and evaluation02 Word report",
       "status": "passed",
       "passed": true,
-      "evidence": []
+      "evidence": [
+        "01-repository.png"
+      ]
     },
     {
       "number": 2,
       "criterion": "Separate GitHub repository with final source and embedded-image report",
-      "status": "passed",
-      "passed": true,
-      "evidence": []
+      "status": "pending_final_remote_verification",
+      "passed": null,
+      "evidence": [
+        "01-repository.png"
+      ]
     },
     {
       "number": 3,
@@ -26,6 +36,7 @@
       "evidence": [
         "03-webcam-baseline.png",
         "03-webcam-baseline-log.txt",
+        "03-webcam-run.png",
         "edge-baseline-inference.txt"
       ]
     },
@@ -37,7 +48,8 @@
       "evidence": [
         "04-detect-integration.png",
         "04-changedetection.png",
-        "edge-tests.txt"
+        "04-authenticated-upload.png",
+        "edge-tests-review-1110.txt"
       ]
     },
     {
@@ -47,7 +59,8 @@
       "passed": true,
       "evidence": [
         "05-local-api.png",
-        "edge-local-upload.json"
+        "edge-local-review-1110.json",
+        "edge-local-review-1110.txt"
       ]
     },
     {
@@ -58,18 +71,22 @@
       "evidence": [
         "06-local-blog.png",
         "06-local-detail.png",
-        "edge-local-upload.json"
+        "edge-local-review-1110.json"
       ]
     },
     {
       "number": 7,
-      "criterion": "Android displays YOLO-uploaded image",
+      "criterion": "Android displays the requested YOLO post in the matched card and detail",
       "status": "passed",
       "passed": true,
       "evidence": [
-        "android/edge-image.png",
-        "android/edge-detail.png",
-        "android-edge.txt"
+        "android/review-1110-local-post2-image.png",
+        "android/review-1110-local-post2-detail.png",
+        "android/review-1110-cloud-post3-image.png",
+        "android/review-1110-cloud-post3-detail.png",
+        "android-review-1110-local-post2.txt",
+        "android-review-1110-cloud-post3.txt",
+        "android-review-1110-cloud-prior-post2.txt"
       ]
     },
     {
@@ -80,7 +97,8 @@
       "evidence": [
         "08-cloud-api.png",
         "cloud-yolo-tests.json",
-        "edge-cloud-inference.txt"
+        "edge-cloud-review-1110.json",
+        "edge-cloud-review-1110.txt"
       ]
     },
     {
@@ -91,7 +109,7 @@
       "evidence": [
         "09-cloud-blog.png",
         "09-cloud-detail.png",
-        "cloud-yolo-tests.json"
+        "edge-cloud-review-1110.json"
       ]
     },
     {
@@ -100,10 +118,13 @@
       "status": "passed",
       "passed": true,
       "evidence": [
-        "android/cache-304.png",
-        "android/cache-recovered.png",
-        "android/cache-offline.png",
-        "android/cache-status.png",
+        "android/review-1110-cache-cache-304.png",
+        "android/review-1110-cache-cache-recovery-status.png",
+        "android/review-1110-route-offline.png",
+        "android-review-1110-outage.json",
+        "android-review-1110-cache.txt",
+        "android-review-1110-route.txt",
+        "android-review-1110-unit-results.json",
         "10-queue-offline.png",
         "10-queue-recovered.png",
         "delivery-http-tests.json",
@@ -115,9 +136,9 @@
     "status": "verified",
     "exists": true,
     "visual_qa_verified": true,
-    "embedded_image_references": 23,
+    "embedded_image_references": 25,
     "external_image_links": false,
-    "sha256": "56fe48c765b5134463ba60940c99985ac65d95d2422cf2466518c90cdc0d5b90"
+    "sha256": "2a2b3c40f21c16496908f775a9c89b016105e9d49f9deec23f880f6c688b76c8"
   },
   "tests": {
     "django": {
@@ -127,15 +148,15 @@
       "evidence": "server-tests.txt"
     },
     "android_jvm": {
-      "tests": 29,
+      "tests": 39,
       "passed": true,
-      "evidence": "android-unit-results.json"
+      "evidence": "android-review-1110-unit-results.json"
     },
     "edge": {
-      "tests": 15,
-      "seconds": 2.033,
+      "tests": 20,
+      "seconds": 2.443,
       "passed": true,
-      "evidence": "edge-tests.txt"
+      "evidence": "edge-tests-review-1110.txt"
     },
     "local_http": {
       "checks": 15,
@@ -152,11 +173,37 @@
       "checks": 14,
       "evidence": "cloud-yolo-tests.json"
     },
+    "ordinary_cli": {
+      "local": {
+        "passed": true,
+        "checks": 10,
+        "post_id": 2,
+        "http_status": 201,
+        "attempts": 1,
+        "evidence": "edge-local-review-1110.json"
+      },
+      "cloud": {
+        "passed": true,
+        "checks": 9,
+        "post_id": 3,
+        "http_status": 201,
+        "attempts": 1,
+        "evidence": "edge-cloud-review-1110.json"
+      }
+    },
     "android_device": {
       "edge": true,
+      "cloudedge": true,
+      "cloud_nonfirst_card": true,
       "offline": true,
-      "cacheaudit": true,
-      "cloudedge": true
+      "cacheaudit": true
+    },
+    "android_device_logs": {
+      "edge": "android-review-1110-local-post2.txt",
+      "cloudedge": "android-review-1110-cloud-post3.txt",
+      "cloud_nonfirst_card": "android-review-1110-cloud-prior-post2.txt",
+      "offline": "android-review-1110-route.txt",
+      "cacheaudit": "android-review-1110-cache.txt"
     }
   },
   "server_coverage": {

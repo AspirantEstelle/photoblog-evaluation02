@@ -7,6 +7,7 @@ import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.util.*;
 import java.util.function.LongSupplier;
+import java.lang.ref.WeakReference;
 
 /** Versioned, bounded disk cache. Every entry commits its metadata and body together. */
 public final class EvidenceCache {
@@ -22,6 +23,50 @@ public final class EvidenceCache {
     private final int maxEntries, maxBody;
     private final LongSupplier clock;
     private int corruptions;
+    private final Map<String,Ticket> current=new HashMap<>();
+    private static final Map<String,WeakReference<EvidenceCache>> stores=new HashMap<>();
+
+    /** Recreated Activities share both the disk lock and the per-server request order. */
+    public static synchronized EvidenceCache open(File directory) throws IOException {
+        String path=directory.getCanonicalPath();
+        stores.values().removeIf(ref->ref.get()==null);
+        WeakReference<EvidenceCache> ref=stores.get(path);
+        EvidenceCache store=ref==null?null:ref.get();
+        if(store==null){store=new EvidenceCache(new File(path));stores.put(path,new WeakReference<>(store));}
+        return store;
+    }
+    public static final class Ticket {
+        final String server;
+        private Set<String> publishedUrls;
+        private Ticket(String server){this.server=server;}
+    }
+    public synchronized Ticket begin(String server) {
+        Ticket ticket=new Ticket(serverKey(server));current.put(ticket.server,ticket);return ticket;
+    }
+    public synchronized boolean isCurrent(Ticket ticket) {
+        return ticket!=null && current.get(ticket.server)==ticket;
+    }
+    public synchronized void cancel(Ticket ticket) {
+        if(isCurrent(ticket))current.remove(ticket.server);
+    }
+    public synchronized void removeIfCurrent(Ticket ticket,String key) throws IOException {
+        if(isCurrent(ticket))remove(ticket.server,key);
+    }
+    public synchronized void putImageIfCurrent(Ticket ticket,String url,byte[] bytes) throws IOException {
+        if(isCurrent(ticket) && (ticket.publishedUrls==null || ticket.publishedUrls.contains(url)))
+            put(ticket.server,url,bytes,"");
+    }
+    /** Publication and pruning share one lock; an old reply must do neither. */
+    public synchronized boolean publish(Ticket ticket,byte[] body,String etag,Set<String> urls) throws IOException {
+        if(!isCurrent(ticket))return false;
+        put(ticket.server,FEED,body,etag);
+        if(urls!=null) {
+            // A previous row may start an image fetch while the new feed is still in flight.
+            ticket.publishedUrls=new HashSet<>(urls);
+            retainImages(ticket.server,ticket.publishedUrls);
+        }
+        return true;
+    }
 
     public static final class Entry {
         public final byte[] body;
@@ -111,7 +156,12 @@ public final class EvidenceCache {
         } finally { Files.deleteIfExists(pending.toPath()); }
     }
     public synchronized void remove(String server,String key) throws IOException { Files.deleteIfExists(entryFile(server,key).toPath()); }
+    public synchronized boolean clearIfCurrent(Ticket ticket) throws IOException {
+        if(!isCurrent(ticket))return false;
+        clear(ticket.server);return true;
+    }
     public synchronized void clear(String server) throws IOException {
+        current.remove(serverKey(server));
         for(File file:files(directory(server))) Files.deleteIfExists(file.toPath());
         Files.deleteIfExists(directory(server).toPath());
     }

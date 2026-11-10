@@ -1,0 +1,58 @@
+{
+  "started_at": "2026-11-10T04:59:41.164411+00:00",
+  "base_url": "https://gyusik.pythonanywhere.com",
+  "input": "YOLOv5/data/images/zidane.jpg",
+  "command": "detect_intrusion.py --source data/images/zidane.jpg --weights yolov5s.pt --device cpu --imgsz 640 --max-frames 1 --outbox <fresh queue> --project <trial directory> --name inference --nosave",
+  "delivery_mode": "Default UploadWorker; no --queue-only, drain, or separate sender",
+  "cli_exit": 0,
+  "checks": [
+    {
+      "name": "normal_cli_succeeded",
+      "passed": true
+    },
+    {
+      "name": "one_event_sent_at_cli_exit",
+      "passed": true
+    },
+    {
+      "name": "default_sender_observed_http201_first_delivery",
+      "passed": true
+    },
+    {
+      "name": "one_upload_attempt",
+      "passed": true
+    },
+    {
+      "name": "queue_released_sent_jpeg",
+      "passed": true
+    },
+    {
+      "name": "api_has_exactly_one_new_post",
+      "passed": true
+    },
+    {
+      "name": "exact_event_title_text_and_classes",
+      "passed": true
+    },
+    {
+      "name": "posted_image_uses_expected_server",
+      "passed": true
+    },
+    {
+      "name": "server_bytes_equal_inference_jpeg",
+      "passed": true
+    }
+  ],
+  "event_id": "5c444339-b555-4e15-ad8a-02bf75978450",
+  "post_id": 3,
+  "attempts": 1,
+  "title": "YOLO 감지: person, tie",
+  "automatic_http_status": 201,
+  "posts_before": 2,
+  "posts_after": 3,
+  "jpeg_bytes": 24501,
+  "archive_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f",
+  "served_sha256": "905a9dade6d6c5aca8e3069f2a32eec4a3d06b2b3e5e3fd7e38b6fc4880bcf7f",
+  "image_url": "https://gyusik.pythonanywhere.com/media/images/2026/11/10/5c444339-b555-4e15-ad8a-02bf75978450.jpg",
+  "passed": true
+}

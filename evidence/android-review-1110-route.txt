@@ -1,0 +1,8 @@
+PASS: Verified feed restored after process restart
+PASS: Network operation finished within 45 seconds
+PASS: Failed network request is explicitly marked offline
+PASS: Offline status shows the last successful server validation
+PASS: Verified photo restored without the server
+
+PASS: offline device integration and genuine screenshots
+

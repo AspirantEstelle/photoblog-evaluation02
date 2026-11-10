@@ -1,0 +1,20 @@
+PASS: Network operation finished within 45 seconds
+PASS: Initial synchronization reaches the server
+PASS: The server contains detection evidence
+PASS: Initial image downloaded and displayed
+PASS: Network operation finished within 45 seconds
+PASS: Unchanged server feed returns HTTP 304
+PASS: HTTP 304 preserves the complete verified feed
+PASS: Network operation finished within 45 seconds
+PASS: Corrupted cache triggers a full HTTP 200 recovery
+PASS: Corrupted entry is detected and discarded
+PASS: Recovered feed contains every server post
+PASS: Network operation finished within 45 seconds
+PASS: Cache clear removes this server's persisted feed and photos
+PASS: Cache clear removes the on-screen saved list
+PASS: Network operation finished within 45 seconds
+PASS: Cache clear discards the validator and refetches the full feed
+PASS: Image reloaded after cache clear
+
+PASS: cacheaudit device integration and genuine screenshots
+

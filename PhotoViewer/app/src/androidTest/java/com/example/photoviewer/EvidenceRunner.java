@@ -68,14 +68,7 @@ public class EvidenceRunner extends Instrumentation {
                 check(status().contains("동기화 완료"),"Server synchronization completed"+(activity.lastError.isEmpty()?"":": "+activity.lastError));
                 pause();capture(mode+"-synced");
                 if(mode.equals("edge") || mode.equals("cloudedge")) {
-                    String expected=args.getString("expected","YOLO");
-                    boolean found=false;
-                    for(Object item:(java.util.List<?>)field("all"))if(item.toString().contains(expected))found=true;
-                    check(found,"Server feed includes the expected edge detection event");
-                    check(firstImageReady(),"The synchronized edge image is displayed");
-                    capture(mode+"-image");
-                    runOnMainSync(()->((androidx.recyclerview.widget.RecyclerView)activity.findViewById(R.id.posts)).getChildAt(0).performClick());
-                    pause();capture(mode+"-detail");sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
+                    checkEdgePost(mode,args.getString("expected","YOLO"),args.getString("postId",""));
                 }
                 if(mode.equals("local") || mode.equals("localui")) {
                     int originalCount=((java.util.List<?>)field("all")).size();
@@ -136,6 +129,52 @@ public class EvidenceRunner extends Instrumentation {
             }
             result.putString("stream",checks+"\nPASS: "+mode+" device integration and genuine screenshots\n");finish(Activity.RESULT_OK,result);
         }catch(Throwable e){result.putString("stream",checks+"\nFAIL: "+e+"\n");finish(Activity.RESULT_CANCELED,result);}
+    }
+    private void checkEdgePost(String mode,String expected,String requestedId)throws Exception {
+        java.util.List<?> posts=(java.util.List<?>)field("shown");int index=-1;org.json.JSONObject matched=null;
+        for(int i=0;i<posts.size();i++){
+            org.json.JSONObject post=(org.json.JSONObject)posts.get(i);
+            if((requestedId.isEmpty() || requestedId.equals(String.valueOf(post.getLong("id"))))
+                && (post.optString("title")+" "+post.optString("text")).contains(expected)) {index=i;matched=post;break;}
+        }
+        check(matched!=null,"Received the requested detection event"+(requestedId.isEmpty()?"":" #"+requestedId));
+        final int position=index;final long id=matched.getLong("id");
+        final String title=matched.getString("title"),url=matched.getString("image");
+        androidx.recyclerview.widget.RecyclerView list=activity.findViewById(R.id.posts);
+        runOnMainSync(()->((androidx.recyclerview.widget.LinearLayoutManager)list.getLayoutManager()).scrollToPositionWithOffset(position,0));
+        final View[] card={null};long until=SystemClock.elapsedRealtime()+15000;
+        while(card[0]==null && SystemClock.elapsedRealtime()<until) {
+            runOnMainSync(()->{
+                androidx.recyclerview.widget.RecyclerView.ViewHolder holder=list.findViewHolderForAdapterPosition(position);
+                if(holder==null || !(holder.itemView instanceof ViewGroup))return;
+                ViewGroup row=(ViewGroup)holder.itemView;ImageView photo=(ImageView)row.getChildAt(0);TextView heading=(TextView)row.getChildAt(1);
+                if(Long.valueOf(id).equals(row.getTag()) && title.contentEquals(heading.getText()) && url.equals(photo.getTag()) && photo.getDrawable()!=null)card[0]=row;
+            });
+            if(card[0]==null)SystemClock.sleep(150);
+        }
+        check(card[0]!=null,"Card for post #"+id+" at position "+position+" displays its matching title and image URL");
+        capture(mode+"-image");runOnMainSync(()->card[0].performClick());
+        AlertDialog detail=(AlertDialog)field("detailDialog");check(detail!=null && detail.isShowing(),"Opened detail for the selected post");
+        final boolean[] confirmed={false};until=SystemClock.elapsedRealtime()+15000;
+        while(!confirmed[0] && SystemClock.elapsedRealtime()<until) {
+            runOnMainSync(()->{
+                View root=detail.getWindow().getDecorView();
+                confirmed[0]=findText(root,title)!=null && endsWithPostId(root,"#"+id) && hasLoadedPhoto(root,url);
+            });
+            if(!confirmed[0])SystemClock.sleep(150);
+        }
+        check(confirmed[0],"Detail shows post #"+id+", the selected title and the matching loaded image");
+        capture(mode+"-detail");sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
+    }
+    private boolean endsWithPostId(View view,String suffix){
+        if(view instanceof TextView && ((TextView)view).getText().toString().endsWith(suffix))return true;
+        if(view instanceof ViewGroup)for(int i=0;i<((ViewGroup)view).getChildCount();i++)if(endsWithPostId(((ViewGroup)view).getChildAt(i),suffix))return true;
+        return false;
+    }
+    private boolean hasLoadedPhoto(View view,String url){
+        if(view instanceof ImageView && url.equals(view.getTag()) && ((ImageView)view).getDrawable()!=null)return true;
+        if(view instanceof ViewGroup)for(int i=0;i<((ViewGroup)view).getChildCount();i++)if(hasLoadedPhoto(((ViewGroup)view).getChildAt(i),url))return true;
+        return false;
     }
     private boolean firstImageReady() {
         long until=SystemClock.elapsedRealtime()+12000;

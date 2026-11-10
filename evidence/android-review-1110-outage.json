@@ -1,0 +1,10 @@
+{
+  "device_origin": "http://127.0.0.1:18762",
+  "host_django": "127.0.0.1:8000",
+  "setup": "adb reverse tcp:18762 tcp:8000; received and displayed the actual local detection post #2",
+  "outage": "Removed only this adb reverse mapping; force-stopped and restarted the app before its failed sync",
+  "forwarding_removed": true,
+  "django_http_after_outage": 200,
+  "verified_device_offline": true,
+  "offline_capture": "android/review-1110-route-offline.png"
+}

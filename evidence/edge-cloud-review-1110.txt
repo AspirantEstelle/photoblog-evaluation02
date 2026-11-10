@@ -1,0 +1,5 @@
+Recorded 2026-11-10T04:59:41.164411+00:00; cloud ordinary CLI, https://gyusik.pythonanywhere.com
+INFO QUEUED event=5c444339-b555-4e15-ad8a-02bf75978450 classes=person,tie
+image 1/1 YOLOv5\data\images\zidane.jpg: 384x640 2 persons, 2 ties, 111.6ms
+INFO SENT event=5c444339-b555-4e15-ad8a-02bf75978450 post=3 replay=false http=201
+INFO OUTBOX {'pending': 0, 'inflight': 0, 'sent': 1, 'failed': 0}

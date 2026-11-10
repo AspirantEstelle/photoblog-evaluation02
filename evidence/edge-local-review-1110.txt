@@ -1,0 +1,6 @@
+Recorded 2026-11-10T04:58:26.516125+00:00; local ordinary CLI, http://127.0.0.1:8000
+INFO QUEUED event=31d02997-433b-4f39-88b8-e6f70487abf7 classes=person,bus
+image 1/1 YOLOv5\data\images\bus.jpg: 640x480 4 persons, 1 bus, 120.1ms
+INFO SENT event=31d02997-433b-4f39-88b8-e6f70487abf7 post=2 replay=false http=201
+INFO OUTBOX {'pending': 0, 'inflight': 0, 'sent': 1, 'failed': 0}
+Django access log: "POST /api_root/Post/ HTTP/1.1" 201 326

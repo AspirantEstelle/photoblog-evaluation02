@@ -50,7 +50,17 @@ python detect.py --source 0 --weights yolov5s.pt --device cpu
 python detect_intrusion.py --source 0 --weights yolov5s.pt --device cpu --max-frames 120
 ```
 
-이전 프레임에 없던 COCO 클래스가 새로 나타날 때만 바운딩 박스가 표시된 JPEG를 게시한다. 클래스가 계속 보이거나 사라지는 상황에서는 새 글을 만들지 않는다. 여러 입력의 이전 상태는 따로 보관한다. 클라우드는 서버 주소를 `https://gyusik.pythonanywhere.com`으로 바꿔 실행한다.
+이전 프레임에 없던 COCO 클래스가 새로 나타나면 바운딩 박스가 표시된 JPEG를 게시한다. 클래스가 계속 보이거나 사라질 때는 새 글을 만들지 않는다. 여러 입력의 이전 상태는 따로 보관한다.
+
+사진 한 장으로 자동 전송을 확인하려면 `YOLOv5` 폴더에서 다음 명령을 실행한다. 로컬 Django 서버를 먼저 켜고 `seed_demo`로 만든 계정의 토큰을 사용한다.
+
+```powershell
+$env:PHOTOBLOG_SERVER = 'http://127.0.0.1:8000'
+$env:PHOTOBLOG_TOKEN = (Get-Content -Raw ../PhotoBlogServer/.demo-credentials.json | ConvertFrom-Json).token
+python detect_intrusion.py --source data/images/bus.jpg --weights yolov5s.pt --device cpu --nosave
+```
+
+`SENT` 로그에 게시글 번호와 `http=201`이 나오면 그 번호로 블로그 사진을 열 수 있다. PythonAnywhere에서 확인할 때는 `PHOTOBLOG_SERVER`에 `https://gyusik.pythonanywhere.com`을, `PHOTOBLOG_TOKEN`에 **그 클라우드 서버에서 발급받은 토큰**을 설정한 뒤 실행한다. 연결이 끊기면 사진은 SQLite에 남는다. 다음 실행에서 재시도 시각이 된 `pending` 항목을 처리한다. 인증 오류나 재시도 횟수 초과로 `failed`가 된 항목은 원인을 해결한 뒤 `python edge_outbox.py retry`로 다시 예약한다.
 
 ## Android
 

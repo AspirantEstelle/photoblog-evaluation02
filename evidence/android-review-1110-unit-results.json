@@ -1,0 +1,200 @@
+{
+  "date": "2026-11-10",
+  "source": "JUnit XML from revised Android project",
+  "jvm_tests": 39,
+  "suites": [
+    {
+      "suite": "com.example.photoviewer.EvidenceCacheTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "clearingOneServerPreservesAnother",
+          "passed": true
+        },
+        {
+          "name": "leastRecentlyUsedImageIsEvicted",
+          "passed": true
+        },
+        {
+          "name": "atomicReplacementHasNoMixedBodyAndEtag",
+          "passed": true
+        },
+        {
+          "name": "copiedEntryCannotCrossServerBoundary",
+          "passed": true
+        },
+        {
+          "name": "incompleteTemporaryFileIsRemovedOnRestart",
+          "passed": true
+        },
+        {
+          "name": "tamperedPayloadIsDiscardedInsteadOfDisplayed",
+          "passed": true
+        },
+        {
+          "name": "rejectedWritePreservesExistingVersion",
+          "passed": true
+        },
+        {
+          "name": "authoritativeFeedPrunesDeletedImagesOnlyInSelectedServer",
+          "passed": true
+        },
+        {
+          "name": "ignoresOnlyTrailingServerSlash",
+          "passed": true
+        },
+        {
+          "name": "feedIsKeptBeforeOlderImagesUnderPressure",
+          "passed": true
+        },
+        {
+          "name": "survivesProcessRestartWithBodyAndValidatorTogether",
+          "passed": true
+        },
+        {
+          "name": "globalByteLimitAppliesAcrossServers",
+          "passed": true
+        },
+        {
+          "name": "twoServersCannotReadEachOthersFeedOrImage",
+          "passed": true
+        },
+        {
+          "name": "truncatedEntryCannotEscapeIntegrityCheck",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "suite": "com.example.photoviewer.FeedClientTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "repeated304WithoutCacheIsNotSuccessfulSynchronization",
+          "passed": true
+        },
+        {
+          "name": "disconnectionReturnsExplicitlyStaleVerifiedData",
+          "passed": true
+        },
+        {
+          "name": "storageFailureDoesNotHideFreshNetworkDataOrMarkItOffline",
+          "passed": true
+        },
+        {
+          "name": "unrelated304ValidatorTriggersUnconditionalRecovery",
+          "passed": true
+        },
+        {
+          "name": "invalidCachedJsonDoesNotSendValidator",
+          "passed": true
+        },
+        {
+          "name": "modified200ReplacesOldFeedAndValidator",
+          "passed": true
+        },
+        {
+          "name": "noCacheAndNoNetworkReportsFailure",
+          "passed": true
+        },
+        {
+          "name": "corruptedCacheDoesNotSendStaleValidator",
+          "passed": true
+        },
+        {
+          "name": "twoUnjustified304sNeverRelabelOrRevalidateOldBody",
+          "passed": true
+        },
+        {
+          "name": "serverSwitchDoesNotSendAnotherServersEtag",
+          "passed": true
+        },
+        {
+          "name": "initialNetworkDataIsUsableEvenWhenItCannotBeCached",
+          "passed": true
+        },
+        {
+          "name": "firstRequestStoresFeedAndEtag",
+          "passed": true
+        },
+        {
+          "name": "deletedServerPostsReplaceCachedFeedWithEmptyList",
+          "passed": true
+        },
+        {
+          "name": "conditional304ReusesVerifiedBodyWithoutReplacingWithEmptyResponse",
+          "passed": true
+        },
+        {
+          "name": "unexpected304WithoutCacheRetriesWithoutValidator",
+          "passed": true
+        },
+        {
+          "name": "malformedResponseCannotOverwriteGoodOfflineData",
+          "passed": true
+        },
+        {
+          "name": "savedBodyWithoutEtagCannotAcceptUnconditional304",
+          "passed": true
+        },
+        {
+          "name": "weaklyEquivalent304RetainsVerifiedBody",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "suite": "com.example.photoviewer.SharedFeedOrderTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "cancelledActivityCannotPublishWithNoNewerRequest",
+          "passed": true
+        },
+        {
+          "name": "previousRowFinishingOnSameTicketCannotRestorePrunedPhoto",
+          "passed": true
+        },
+        {
+          "name": "delayed304CannotRestoreOldBodyOrPruneNewPhotos",
+          "passed": true
+        },
+        {
+          "name": "requestsForDifferentServersAreIndependent",
+          "passed": true
+        },
+        {
+          "name": "delayedDestructionAndClearDoNotCancelNewOwner",
+          "passed": true
+        },
+        {
+          "name": "delayed200CannotOverwriteNewFeedOrPruneItsPhotos",
+          "passed": true
+        },
+        {
+          "name": "clearedServerRemainsEmptyAfterLateResponseAndImage",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "lint": {
+    "errors": 0,
+    "warnings": 20
+  },
+  "app_id": "com.example.photoviewer02",
+  "apk_sha256": "10607a47819a5ac8fefa5d8eb7cafe2c23b94ce37c07aa7545ae061b9e11a3b2",
+  "android_test_apk_sha256": "01ee1b80451f3b66cb308b2d1cd1d6e9021d06a36bc8e33f9472a3a445f7f4d4",
+  "tested_with": "Windows, JDK 21, Android SDK35 (Gradle cached dependencies)",
+  "device_installed_apk_sha256": "10607a47819a5ac8fefa5d8eb7cafe2c23b94ce37c07aa7545ae061b9e11a3b2",
+  "device_installed_android_test_apk_sha256": "01ee1b80451f3b66cb308b2d1cd1d6e9021d06a36bc8e33f9472a3a445f7f4d4"
+}

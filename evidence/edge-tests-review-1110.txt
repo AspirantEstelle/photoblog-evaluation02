@@ -1,0 +1,38 @@
+test_camera_histories_are_independent (test_edge.EdgeTests.test_camera_histories_are_independent) ... ok
+test_class_appearance_repeated_presence_disappearance_and_reappearance (test_edge.EdgeTests.test_class_appearance_repeated_presence_disappearance_and_reappearance) ... ok
+test_close_attempts_ready_events_but_does_not_drain_an_arbitrary_backlog (test_edge.EdgeTests.test_close_attempts_ready_events_but_does_not_drain_an_arbitrary_backlog) ... ok
+test_expired_worker_cannot_modify_explicitly_retried_event (test_edge.EdgeTests.test_expired_worker_cannot_modify_explicitly_retried_event) ... ok
+test_expired_worker_lease_recovers_after_crash (test_edge.EdgeTests.test_expired_worker_lease_recovers_after_crash) ... ok
+test_external_http_and_embedded_credentials_are_rejected (test_edge.EdgeTests.test_external_http_and_embedded_credentials_are_rejected) ... ok
+test_network_failure_is_delayed_then_replayed_with_identical_key_payload (test_edge.EdgeTests.test_network_failure_is_delayed_then_replayed_with_identical_key_payload) ... PENDING event=de8d25db-8b8c-45b5-b29f-c9c596262f6b attempt=1 reason=ConnectionError
+ok
+test_new_detection_wakes_an_idle_worker_immediately (test_edge.EdgeTests.test_new_detection_wakes_an_idle_worker_immediately) ... ok
+test_offline_close_preserves_backoff_and_stops_after_first_failure (test_edge.EdgeTests.test_offline_close_preserves_backoff_and_stops_after_first_failure) ... PENDING event=0625b252-eb1b-4372-9bf3-5ae5ae654b78 attempt=1 reason=ConnectionError
+ok
+test_old_worker_cannot_override_new_lease_result (test_edge.EdgeTests.test_old_worker_cannot_override_new_lease_result) ... ok
+test_permanent_http_failures_require_explicit_retry (test_edge.EdgeTests.test_permanent_http_failures_require_explicit_retry) ... FAILED event=c6679b88-0bb7-455a-b858-f6b4aef818b0 attempt=1 reason=HTTP 400
+FAILED event=e6edb595-52cf-46ce-9a5f-4a318b4a7d00 attempt=1 reason=HTTP 401
+FAILED event=9215074b-5918-4e57-931d-34abc4a8010d attempt=1 reason=HTTP 403
+FAILED event=44603077-5d09-4c80-a314-c2c76be6a706 attempt=1 reason=HTTP 409
+FAILED event=84410d55-95f3-48c2-be33-b1424a7813e1 attempt=1 reason=HTTP 410
+FAILED event=71f35751-54eb-4b98-9ac7-6c1183a19a9c attempt=1 reason=HTTP 302
+ok
+test_queue_size_limit_preserves_existing_event (test_edge.EdgeTests.test_queue_size_limit_preserves_existing_event) ... ok
+test_restart_preserves_uuid_timestamp_and_jpeg_payload (test_edge.EdgeTests.test_restart_preserves_uuid_timestamp_and_jpeg_payload) ... ok
+test_retry_after_is_bounded (test_edge.EdgeTests.test_retry_after_is_bounded) ... PENDING event=9a457d79-e4ad-4d66-8b6b-4f1b7e2a31e8 attempt=1 reason=HTTP 429
+ok
+test_shutdown_deadline_preserves_an_inflight_upload_without_second_sender (test_edge.EdgeTests.test_shutdown_deadline_preserves_an_inflight_upload_without_second_sender) ... Shutdown deadline reached; the in-flight event remains recoverable
+ok
+test_status_page_reads_real_state_and_escapes_text (test_edge.EdgeTests.test_status_page_reads_real_state_and_escapes_text) ... ok
+test_success_releases_blob_and_server_queues_are_isolated (test_edge.EdgeTests.test_success_releases_blob_and_server_queues_are_isolated) ... ok
+test_transient_http_retry_and_attempt_limit (test_edge.EdgeTests.test_transient_http_retry_and_attempt_limit) ... PENDING event=fb336551-13f2-42c4-b092-9cf89d3dbb81 attempt=1 reason=HTTP 503
+FAILED event=fb336551-13f2-42c4-b092-9cf89d3dbb81 attempt=2 reason=HTTP 429
+ok
+test_two_workers_do_not_claim_same_event (test_edge.EdgeTests.test_two_workers_do_not_claim_same_event) ... ok
+test_unavailable_optional_archive_still_preserves_detection_image (test_edge.EdgeTests.test_unavailable_optional_archive_still_preserves_detection_image) ... Archive copy unavailable; event 300bb179-b22e-47b2-84d1-826b6d4e3343 remains safely queued
+ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 2.443s
+
+OK

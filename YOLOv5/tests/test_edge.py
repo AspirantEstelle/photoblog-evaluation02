@@ -1,15 +1,17 @@
 import tempfile
 import threading
 import unittest
+import os
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from unittest.mock import patch
 
 import cv2
 import numpy as np
 import requests
 
 from changedetection import ChangeDetection
-from edge_outbox import Connection, Outbox, QueueFull, Uploader, normalize_server
+from edge_outbox import Connection, Outbox, QueueFull, Uploader, UploadWorker, normalize_server
 from outbox_status import snapshot, render
 
 
@@ -47,6 +49,93 @@ class EdgeTests(unittest.TestCase):
 
     def enqueue(self, queue=None, **kwargs):
         return (queue or self.queue).enqueue(self.conn.server, 'person', 'person appeared', self.image, **kwargs)
+
+    def idle_worker(self, uploader):
+        idle = threading.Event()
+        original = uploader.flush_once
+        def observed_attempt():
+            result = original()
+            if result is None:
+                idle.set()
+            return result
+        uploader.flush_once = observed_attempt
+        worker = UploadWorker(uploader, poll_interval=60).start()
+        self.addCleanup(worker.close)
+        self.assertTrue(idle.wait(3), 'Worker did not reach an empty queue')
+        return worker
+
+    def test_new_detection_wakes_an_idle_worker_immediately(self):
+        posted = threading.Event()
+        class RecordingTransport(Transport):
+            def post(inner, url, **kwargs):
+                response = super().post(url, **kwargs)
+                posted.set()
+                return response
+        with patch.dict(os.environ, {'PHOTOBLOG_TOKEN': self.conn.token}):
+            detector = ChangeDetection(['person'], server=self.conn.server,
+                                       outbox=self.root / 'normal.sqlite3', start_worker=False)
+        transport = RecordingTransport(Response(201))
+        detector.uploader.session = transport
+        detector.worker = self.idle_worker(detector.uploader)
+        eid = detector.add(['person'], [1], self.root, np.zeros((32,32,3), dtype=np.uint8))
+        self.assertTrue(posted.wait(3), 'Committed event waited for the 60-second idle poll')
+        detector.close()
+        self.assertEqual(transport.calls[0][1]['headers']['Idempotency-Key'], eid)
+        self.assertEqual(detector.queue.status()['counts']['sent'], 1)
+
+    def test_close_attempts_ready_events_but_does_not_drain_an_arbitrary_backlog(self):
+        transport = Transport(*[Response(201) for _ in range(UploadWorker.CLOSE_MAX_EVENTS)])
+        worker = self.idle_worker(Uploader(self.queue, self.conn, session=transport))
+        for _ in range(UploadWorker.CLOSE_MAX_EVENTS + 2):
+            self.enqueue()
+        worker.close()
+        counts = self.queue.status()['counts']
+        self.assertEqual(counts['sent'], UploadWorker.CLOSE_MAX_EVENTS)
+        self.assertEqual(counts['pending'], 2)
+
+    def test_offline_close_preserves_backoff_and_stops_after_first_failure(self):
+        transport = Transport(requests.ConnectionError('offline'))
+        worker = self.idle_worker(Uploader(self.queue, self.conn, session=transport))
+        for _ in range(3):
+            self.enqueue()
+        worker.close()
+        events = self.queue.status()['events']
+        self.assertEqual(len(transport.calls), 1)
+        self.assertEqual(sum(event['attempts'] for event in events), 1)
+        self.assertTrue(all(event['state'] == 'pending' and event['image_size'] for event in events))
+        self.assertEqual(max(event['next_attempt'] for event in events), self.time + 2)
+
+    def test_shutdown_deadline_preserves_an_inflight_upload_without_second_sender(self):
+        entered, release = threading.Event(), threading.Event()
+        class SlowTransport(Transport):
+            def post(inner, url, **kwargs):
+                entered.set()
+                release.wait(4)
+                return super().post(url, **kwargs)
+        transport = SlowTransport(Response(201))
+        worker = self.idle_worker(Uploader(self.queue, self.conn, session=transport))
+        try:
+            self.enqueue(); worker.notify_committed()
+            self.assertTrue(entered.wait(3))
+            worker.close(grace_seconds=0.05)
+            self.assertTrue(worker.thread.is_alive())
+            row = self.queue.status()['events'][0]
+            self.assertEqual(row['state'], 'inflight'); self.assertGreater(row['image_size'], 0)
+        finally:
+            release.set(); worker.thread.join(3)
+        self.assertEqual(len(transport.calls), 1)
+        self.assertEqual(self.queue.status()['counts']['sent'], 1)
+
+    def test_unavailable_optional_archive_still_preserves_detection_image(self):
+        detector = ChangeDetection(['person'], outbox=self.root / 'archive.sqlite3', queue_only=True)
+        blocked = self.root / 'not-a-directory'; blocked.write_bytes(b'occupied')
+        image = np.zeros((24,32,3), dtype=np.uint8)
+        event = detector.add(['person'], [1], blocked, image)
+        self.assertIsNotNone(event)
+        self.assertIsNone(detector.add(['person'], [1], blocked, image))
+        row = detector.queue.claim(detector.connection.server)
+        self.assertEqual(row['event_id'], event)
+        self.assertEqual(cv2.imdecode(np.frombuffer(row['image'], np.uint8), cv2.IMREAD_COLOR).shape[:2], (240,320))
 
     def test_class_appearance_repeated_presence_disappearance_and_reappearance(self):
         detector = ChangeDetection(['person', 'cat'], outbox=self.root / 'change.sqlite3', queue_only=True)
