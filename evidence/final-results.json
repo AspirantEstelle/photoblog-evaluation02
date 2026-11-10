@@ -1,13 +1,13 @@
 {
-  "updated_at": "2026-11-10T05:14:56.074278+00:00",
+  "updated_at": "2026-11-10T05:46:19.168551+00:00",
   "repository_url": "https://github.com/AspirantEstelle/photoblog-evaluation02",
   "cloud_url": "https://gyusik.pythonanywhere.com/",
-  "submission_complete": false,
+  "submission_complete": true,
   "revision_checks": {
     "ordinary_local_upload": true,
     "ordinary_cloud_upload": true,
     "matching_android_post": true,
-    "word_contains_local_and_cloud_browser_address_bars": false
+    "word_contains_local_and_cloud_browser_address_bars": true
   },
   "criteria": [
     {
@@ -136,9 +136,29 @@
     "status": "verified",
     "exists": true,
     "visual_qa_verified": true,
-    "embedded_image_references": 25,
+    "all_pictures_in_relevant_evidence_cells": true,
+    "picture_counts_by_row": {
+      "1": 1,
+      "3": 2,
+      "4": 3,
+      "5": 1,
+      "6": 2,
+      "7": 4,
+      "8": 1,
+      "9": 2,
+      "10-1S": 1,
+      "10-1C": 6,
+      "10-2S": 1,
+      "10-2E": 2
+    },
+    "distinct_screenshots_in_evidence_cells": 25,
+    "original_user_screenshots_in_rows_6_and_9": true,
+    "embedded_image_references": 26,
     "external_image_links": false,
-    "sha256": "2a2b3c40f21c16496908f775a9c89b016105e9d49f9deec23f880f6c688b76c8"
+    "sha256": "9b910906a0ccfe33404e43a162015abdc3476c65beb4da517b67e1043847634b",
+    "rendered_pages": 8,
+    "rendered_picture_count": 26,
+    "original_rubric_text_preserved": true
   },
   "tests": {
     "django": {
