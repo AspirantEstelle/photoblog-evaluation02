@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T06:51:36.598956+00:00",
+  "updated_at": "2026-11-10T07:34:35.365387+00:00",
   "repository_url": "https://github.com/AspirantEstelle/photoblog-evaluation02",
   "cloud_url": "https://gyusik.pythonanywhere.com/",
   "submission_complete": true,
@@ -155,16 +155,21 @@
     "original_user_screenshots_in_rows_6_and_9": true,
     "embedded_image_references": 26,
     "external_image_links": false,
-    "sha256": "2b009f16305b5d1474eed2438c917a7a85ba89eeaf244bd2e470de647094dd2e",
+    "sha256": "8cf2741764fdf7b816fedf95788b8da01c29551aa7248a836ec56d542111180f",
+    "visible_text_removed_only_from_picture_cells": true,
+    "picture_caption_metadata_removed": true,
+    "matching_api_detail_and_mobile_post_ids": {
+      "local": 2,
+      "cloud": 3
+    },
     "rendered_pages": 8,
     "rendered_picture_count": 26,
-    "original_rubric_text_preserved": true,
-    "visible_text_removed_only_from_picture_cells": true
+    "original_rubric_text_preserved": true
   },
   "tests": {
     "django": {
-      "tests": 33,
-      "seconds": 139.254,
+      "tests": 34,
+      "seconds": 38.294,
       "passed": true,
       "evidence": "server-tests.txt"
     },
@@ -228,9 +233,9 @@
     }
   },
   "server_coverage": {
-    "percent": 98,
-    "statements": 197,
-    "branches": 30,
+    "percent": 97,
+    "statements": 204,
+    "branches": 32,
     "scope": "blog only; excludes tests, migrations, management commands, and Android/YOLO code"
   },
   "android_lint": {
