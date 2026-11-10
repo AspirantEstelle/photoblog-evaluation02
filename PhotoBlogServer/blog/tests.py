@@ -1,10 +1,16 @@
 import io
 import shutil
+import sqlite3
 import tempfile
+import uuid
+from contextlib import closing
+from pathlib import Path
 from PIL import Image
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase, override_settings
+from django.db import connections
+from django.test import SimpleTestCase, TestCase, override_settings
 from django.urls import reverse
 from django.utils import timezone
 from rest_framework.test import APIClient
@@ -16,6 +22,62 @@ def picture(name='example.png'):
     stream = io.BytesIO()
     Image.new('RGB', (32, 32), '#3974b9').save(stream, 'PNG')
     return SimpleUploadedFile(name, stream.getvalue(), content_type='image/png')
+
+
+class SQLiteCommitLockTests(SimpleTestCase):
+    databases = {'default'}
+
+    def test_locked_commit_cleans_only_its_image_and_retry_preserves_both_posts(self):
+        from .models import UploadReceipt
+
+        # An in-memory SQLite database cannot reproduce the file-level reader
+        # lock that blocks COMMIT after the JPEG and both rows were written.
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        root = Path(temp.name)
+        previous = connections['default']
+        database = previous.copy()
+        database.settings_dict.update(NAME=str(root / 'test.sqlite3'), OPTIONS={'timeout': 0.1})
+        connections['default'] = database
+        self.addCleanup(connections.__setitem__, 'default', previous)
+        self.addCleanup(database.close)
+        call_command('migrate', verbosity=0)
+        api = APIClient()
+        api.force_authenticate(get_user_model().objects.create_user('camera'))
+        media = root / 'media'
+
+        def upload(event_id, title):
+            return api.post('/api_root/Post/', {'title': title, 'text': 'camera', 'image': picture('camera.png')},
+                            format='multipart', HTTP_IDEMPOTENCY_KEY=str(event_id))
+
+        def stored_files():
+            return {path.relative_to(media): path.read_bytes() for path in media.rglob('*.png')}
+
+        with override_settings(MEDIA_ROOT=media):
+            self.assertEqual(upload(uuid.uuid4(), 'first').status_code, 201)
+            before = stored_files()
+            self.assertEqual(len(before), 1)
+            event_id = uuid.uuid4()
+            with closing(sqlite3.connect(database.settings_dict['NAME'])) as reader:
+                reader.execute('BEGIN')
+                reader.execute('SELECT id FROM blog_post').fetchall()
+                response = upload(event_id, 'second')
+                self.assertEqual(response.status_code, 503)
+                self.assertEqual(response['Retry-After'], '1')
+            self.assertEqual(stored_files(), before)
+            self.assertEqual(Post.objects.count(), 1)
+            self.assertFalse(UploadReceipt.objects.filter(event_id=event_id).exists())
+
+            created = upload(event_id, 'second')
+            self.assertEqual(created.status_code, 201)
+            replay = upload(event_id, 'second')
+            self.assertEqual(replay.status_code, 200)
+            self.assertEqual(replay.data['id'], created.data['id'])
+            self.assertEqual(Post.objects.count(), 2)
+            self.assertEqual(UploadReceipt.objects.count(), 2)
+            second_image = Path(Post.objects.get(pk=created.data['id']).image.name)
+            self.assertNotIn(second_image, before)
+            self.assertEqual(stored_files(), {**before, second_image: picture().read()})
 
 
 class PhotoBlogTests(TestCase):

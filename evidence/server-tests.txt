@@ -1,6 +1,5 @@
-Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
-
-Found 33 test(s).
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+Found 34 test(s).
 Operations to perform:
   Synchronize unmigrated apps: messages, rest_framework, staticfiles
   Apply all migrations: admin, auth, authtoken, blog, contenttypes, sessions
@@ -34,7 +33,7 @@ Running migrations:
   Applying blog.0003_alter_post_image... OK
   Applying blog.0004_alter_post_image... OK
   Applying blog.0005_upload_receipt... OK
-test_bad_keys_and_unauthenticated_delivery_are_rejected (blog.tests.ConditionalDeliveryTests.test_bad_keys_and_unauthenticated_delivery_are_rejected) ... ok
+  Applying sessions.0001_initial...test_bad_keys_and_unauthenticated_delivery_are_rejected (blog.tests.ConditionalDeliveryTests.test_bad_keys_and_unauthenticated_delivery_are_rejected) ... ok
 test_browsable_html_is_never_revalidated_as_json (blog.tests.ConditionalDeliveryTests.test_browsable_html_is_never_revalidated_as_json) ... ok
 test_deleted_event_is_not_recreated_by_a_late_retry (blog.tests.ConditionalDeliveryTests.test_deleted_event_is_not_recreated_by_a_late_retry) ... ok
 test_edit_image_and_delete_invalidate_list_and_detail (blog.tests.ConditionalDeliveryTests.test_edit_image_and_delete_invalidate_list_and_detail) ... ok
@@ -67,12 +66,12 @@ test_token_login (blog.tests.PhotoBlogTests.test_token_login) ... ok
 test_web_create_edit_and_permissions (blog.tests.PhotoBlogTests.test_web_create_edit_and_permissions) ... ok
 test_web_list_search_detail (blog.tests.PhotoBlogTests.test_web_list_search_detail) ... ok
 test_web_rejects_image_format_the_app_cannot_display (blog.tests.PhotoBlogTests.test_web_rejects_image_format_the_app_cannot_display) ... ok
+test_locked_commit_cleans_only_its_image_and_retry_preserves_both_posts (blog.tests.SQLiteCommitLockTests.test_locked_commit_cleans_only_its_image_and_retry_preserves_both_posts) ... ok
 
 ----------------------------------------------------------------------
-Ran 33 tests in 139.254s
+Ran 34 tests in 38.294s
 
 OK
-Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
-
-  Applying sessions.0001_initial... OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+ OK
 System check identified no issues (0 silenced).

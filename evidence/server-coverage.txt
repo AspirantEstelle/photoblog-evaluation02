@@ -9,6 +9,6 @@ blog\permissions.py       4      0      0      0   100%
 blog\serializers.py      12      0      0      0   100%
 blog\urls.py              6      0      0      0   100%
 blog\validators.py        7      0      4      0   100%
-blog\views.py           102      1     22      1    98%   120
+blog\views.py           109      1     24      2    98%   124->128, 129
 -----------------------------------------------------------------
-TOTAL                   197      4     30      1    98%
+TOTAL                   204      4     32      2    97%

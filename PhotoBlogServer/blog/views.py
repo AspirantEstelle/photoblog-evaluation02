@@ -95,6 +95,7 @@ class BlogImages(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         digest = payload_digest(serializer.validated_data)
+        stored_image = None
         try:
             with transaction.atomic():
                 receipt, created = UploadReceipt.objects.get_or_create(
@@ -107,16 +108,24 @@ class BlogImages(viewsets.ModelViewSet):
                         return Response({'detail': 'This event was accepted, but its post has been deleted.'}, status=410)
                     return Response(self.get_serializer(receipt.post).data, status=200,
                                     headers={'Idempotency-Replayed': 'true'})
+                # Storage is outside the database transaction. Keep the actual
+                # name (including any collision suffix) until commit succeeds.
+                image = Post(image=serializer.validated_data['image']).image
+                image.save(image.name, image.file, save=False)
+                stored_image = image
+                serializer.validated_data['image'] = image.name
                 self.perform_create(serializer)
                 receipt.post = serializer.instance
                 receipt.save(update_fields=['post'])
                 headers = self.get_success_headers(serializer.data)
                 headers['Idempotency-Replayed'] = 'false'
                 return Response(serializer.data, status=201, headers=headers)
-        except OperationalError as error:
+        except Exception as error:
+            if stored_image is not None:
+                stored_image.storage.delete(stored_image.name)
             # SQLite serializes writers. A concurrent edge sender can safely
             # retry its unchanged UUID rather than lose or duplicate the event.
-            if 'locked' not in str(error).lower():
+            if not isinstance(error, OperationalError) or 'locked' not in str(error).lower():
                 raise
             return Response({'detail': 'Another upload is being saved. Retry this same event key.'},
                             status=503, headers={'Retry-After': '1'})
