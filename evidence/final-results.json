@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T06:28:19.560650+00:00",
+  "updated_at": "2026-11-10T06:51:36.598956+00:00",
   "repository_url": "https://github.com/AspirantEstelle/photoblog-evaluation02",
   "cloud_url": "https://gyusik.pythonanywhere.com/",
   "submission_complete": true,
@@ -155,11 +155,11 @@
     "original_user_screenshots_in_rows_6_and_9": true,
     "embedded_image_references": 26,
     "external_image_links": false,
-    "sha256": "8c22fc59cb1c230022578d06bb9443ebaacf9ef7d45b713e91a1e5833ba0dd8a",
+    "sha256": "2b009f16305b5d1474eed2438c917a7a85ba89eeaf244bd2e470de647094dd2e",
     "rendered_pages": 8,
     "rendered_picture_count": 26,
     "original_rubric_text_preserved": true,
-    "only_added_text_is_submission_url": true
+    "visible_text_removed_only_from_picture_cells": true
   },
   "tests": {
     "django": {
