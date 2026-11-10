@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T05:13:49.467805+00:00",
+  "updated_at": "2026-11-10T05:14:56.074278+00:00",
   "repository_url": "https://github.com/AspirantEstelle/photoblog-evaluation02",
   "cloud_url": "https://gyusik.pythonanywhere.com/",
   "submission_complete": false,
@@ -22,8 +22,8 @@
     {
       "number": 2,
       "criterion": "Separate GitHub repository with final source and embedded-image report",
-      "status": "pending_final_remote_verification",
-      "passed": null,
+      "status": "passed",
+      "passed": true,
       "evidence": [
         "01-repository.png"
       ]
